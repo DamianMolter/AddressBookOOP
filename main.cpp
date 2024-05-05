@@ -3,8 +3,12 @@
 
 using namespace std;
 
-int main()
-{
-    cout << "Hello world!" << endl;
+int main() {
+    KsiazkaAdresowa ksiazkaAdresowa;
+    Uzytkownik uzytkownik;
+    ksiazkaAdresowa.rejestracjaUzytkownika();
+    ksiazkaAdresowa.rejestracjaUzytkownika();
+    ksiazkaAdresowa.wyswietlWszystkichUzytkownikow();
+
     return 0;
 }
