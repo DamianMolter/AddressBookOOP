@@ -32,5 +32,11 @@
 *.app
 
 # Files with contancts
-KsiazkaAdresowa.*
 ks-strukt.cpp
+bin/
+Plan/
+obj/
+KsiazkaAdresowa.cbp
+KsiazkaAdresowa.depend
+KsiazkaAdresowa.layout
+Uzytkownicy.txt
