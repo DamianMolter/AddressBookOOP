@@ -56,3 +56,8 @@ Uzytkownik UzytkownikMenedzer :: podajDaneNowegoUzytkownika() {
 
     return uzytkownik;
 }
+
+void UzytkownikMenedzer :: wczytajUzytkownikowZPliku(){
+    PlikZUzytkownikami plikZUzytkownikami;
+    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
+}
