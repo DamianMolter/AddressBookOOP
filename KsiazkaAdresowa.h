@@ -9,10 +9,9 @@ using namespace std;
 class KsiazkaAdresowa{
     UzytkownikMenedzer uzytkownikMenedzer;
 public:
+    KsiazkaAdresowa();
     void rejestracjaUzytkownika();
     void wyswietlWszystkichUzytkownikow();
-
-
 };
 
 #endif

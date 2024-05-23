@@ -13,15 +13,15 @@ using namespace std;
 
 class UzytkownikMenedzer{
     int idZalogowanegoUzytkownika;
-    Uzytkownik uzytkownik;
     vector <Uzytkownik> uzytkownicy;
 
+    Uzytkownik podajDaneNowegoUzytkownika();
     int pobierzIdNowegoUzytkownika();
     bool czyIstniejeLogin(string login);
 public:
     void rejestracjaUzytkownika();
     void wyswietlWszystkichUzytkownikow();
-    Uzytkownik podajDaneNowegoUzytkownika();
+    void wczytajUzytkownikowZPliku();
 
 };
 #endif
