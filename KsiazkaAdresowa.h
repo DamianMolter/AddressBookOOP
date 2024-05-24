@@ -11,6 +11,7 @@ class KsiazkaAdresowa{
 public:
     KsiazkaAdresowa();
     void rejestracjaUzytkownika();
+    void logowanieUzytkownika();
     void wyswietlWszystkichUzytkownikow();
 };
 
