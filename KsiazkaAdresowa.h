@@ -13,6 +13,7 @@ public:
     void rejestracjaUzytkownika();
     void logowanieUzytkownika();
     void wyswietlWszystkichUzytkownikow();
+    void zmianaHaslaZalogowanegoUzytkownika();
 };
 
 #endif

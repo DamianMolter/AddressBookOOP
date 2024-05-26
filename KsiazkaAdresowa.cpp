@@ -18,8 +18,13 @@ void KsiazkaAdresowa :: logowanieUzytkownika(){
 
 }
 
-void KsiazkaAdresowa::wyswietlWszystkichUzytkownikow(){
+void KsiazkaAdresowa :: wyswietlWszystkichUzytkownikow(){
 
     uzytkownikMenedzer.wyswietlWszystkichUzytkownikow();
 }
 
+void KsiazkaAdresowa :: zmianaHaslaZalogowanegoUzytkownika(){
+
+    uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika();
+
+}

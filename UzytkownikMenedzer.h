@@ -17,10 +17,13 @@ class UzytkownikMenedzer{
     Uzytkownik podajDaneNowegoUzytkownika();
     int pobierzIdNowegoUzytkownika();
     bool czyIstniejeLogin(string login);
+    void zapiszWszystkichUzytkownikowDoPliku();
 public:
+    int pobierzIdZalogowanegoUzytkownika();
     void rejestracjaUzytkownika();
     void wyswietlWszystkichUzytkownikow();
     void wczytajUzytkownikowZPliku();
     int logowanieUzytkownika();
+    void zmianaHaslaZalogowanegoUzytkownika();
 };
 #endif
