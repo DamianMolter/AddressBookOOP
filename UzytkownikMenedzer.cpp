@@ -1,5 +1,10 @@
 #include "UzytkownikMenedzer.h"
 
+int UzytkownikMenedzer :: pobierzIdZalogowanegoUzytkownika(){
+
+    return idZalogowanegoUzytkownika;
+}
+
 void UzytkownikMenedzer :: rejestracjaUzytkownika() {
     Uzytkownik uzytkownik = podajDaneNowegoUzytkownika();
     uzytkownicy.push_back(uzytkownik);

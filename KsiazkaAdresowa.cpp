@@ -28,3 +28,14 @@ void KsiazkaAdresowa :: zmianaHaslaZalogowanegoUzytkownika(){
     uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika();
 
 }
+
+void KsiazkaAdresowa :: dodajAdresata(){
+
+    adresatMenedzer.dodajAdresata();
+
+}
+
+void KsiazkaAdresowa :: wyswietlWszystkichAdresatow(){
+
+    adresatMenedzer.wyswietlWszystkichAdresatow();
+}
