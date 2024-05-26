@@ -7,6 +7,8 @@ int main() {
     KsiazkaAdresowa ksiazkaAdresowa;
     ksiazkaAdresowa.wyswietlWszystkichUzytkownikow();
     ksiazkaAdresowa.logowanieUzytkownika();
+    ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
+    ksiazkaAdresowa.wyswietlWszystkichUzytkownikow();
 
     return 0;
 }
