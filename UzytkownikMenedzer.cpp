@@ -1,7 +1,6 @@
 #include "UzytkownikMenedzer.h"
 
 int UzytkownikMenedzer :: pobierzIdZalogowanegoUzytkownika(){
-
     return idZalogowanegoUzytkownika;
 }
 
@@ -44,7 +43,6 @@ void UzytkownikMenedzer :: wyswietlWszystkichUzytkownikow() {
 
 }
 Uzytkownik UzytkownikMenedzer :: podajDaneNowegoUzytkownika() {
-    Uzytkownik uzytkownik;
     string login, haslo;
 
     uzytkownik.ustawId(pobierzIdNowegoUzytkownika());
@@ -69,7 +67,6 @@ void UzytkownikMenedzer :: wczytajUzytkownikowZPliku(){
 
 int UzytkownikMenedzer :: logowanieUzytkownika()
 {
-    Uzytkownik uzytkownik;
     string login = "", haslo = "";
 
     cout << endl << "Podaj login: ";

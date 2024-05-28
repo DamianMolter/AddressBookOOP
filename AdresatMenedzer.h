@@ -5,19 +5,21 @@
 #include <vector>
 #include <windows.h>
 #include <fstream>
-#include <sstream>
 #include "UzytkownikMenedzer.h"
 #include "MetodyPomocnicze.h"
 #include "Adresat.h"
+#include "PlikZAdresatami.h"
 
 using namespace std;
 
 class AdresatMenedzer {
 
+    Adresat adresat;
+    UzytkownikMenedzer uzytkownikMenedzer;
     vector <Adresat> adresaci;
     int idOstatniegoAdresata;
-    int idZalogowanegoUzytkownika;
     Adresat podajDaneNowegoAdresata();
+    int pobierzIdNowegoAdresata();
     void wyswietlDaneAdresata(size_t index);
 public:
     AdresatMenedzer();

@@ -12,7 +12,6 @@ using namespace std;
 class PlikZUzytkownikami {
 
     string nazwaPlikuZUzytkownikami;
-    bool czyPlikJestPusty();
     string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
     string daneJednegoUzytkownikaOddzielonePionowymiKreskami;
 public:
