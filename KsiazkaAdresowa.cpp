@@ -12,9 +12,9 @@ void KsiazkaAdresowa::rejestracjaUzytkownika(){
 
 }
 
-void KsiazkaAdresowa :: logowanieUzytkownika(){
+int KsiazkaAdresowa :: logowanieUzytkownika(){
 
-    uzytkownikMenedzer.logowanieUzytkownika();
+    return uzytkownikMenedzer.logowanieUzytkownika();
 
 }
 
@@ -29,9 +29,9 @@ void KsiazkaAdresowa :: zmianaHaslaZalogowanegoUzytkownika(){
 
 }
 
-void KsiazkaAdresowa :: dodajAdresata(){
+void KsiazkaAdresowa :: dodajAdresata(int IdZalogowanegoUzytkownika){
 
-    adresatMenedzer.dodajAdresata();
+    adresatMenedzer.dodajAdresata(IdZalogowanegoUzytkownika);
 
 }
 

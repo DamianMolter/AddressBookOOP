@@ -16,14 +16,15 @@ class AdresatMenedzer {
 
     Adresat adresat;
     UzytkownikMenedzer uzytkownikMenedzer;
+    int IdZalogowanegoUzytkownika;
     vector <Adresat> adresaci;
     int idOstatniegoAdresata;
-    Adresat podajDaneNowegoAdresata();
+    Adresat podajDaneNowegoAdresata(int IdZalogowanegoUzytkownika);
     int pobierzIdNowegoAdresata();
     void wyswietlDaneAdresata(size_t index);
 public:
     AdresatMenedzer();
-    int dodajAdresata();
+    int dodajAdresata(int IdZalogowanegoUzytkownika);
     void wyswietlWszystkichAdresatow();
 };
 

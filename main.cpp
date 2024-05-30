@@ -6,7 +6,8 @@ using namespace std;
 int main() {
     KsiazkaAdresowa ksiazkaAdresowa;
     ksiazkaAdresowa.wyswietlWszystkichUzytkownikow();
-    ksiazkaAdresowa.dodajAdresata();
+    int IdZalogowanegoUzytkownika = ksiazkaAdresowa.logowanieUzytkownika();
+    ksiazkaAdresowa.dodajAdresata(IdZalogowanegoUzytkownika);
     ksiazkaAdresowa.wyswietlWszystkichAdresatow();
 
     return 0;

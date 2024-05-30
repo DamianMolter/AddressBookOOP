@@ -10,13 +10,14 @@ using namespace std;
 class KsiazkaAdresowa {
     UzytkownikMenedzer uzytkownikMenedzer;
     AdresatMenedzer adresatMenedzer;
+    int IdZalogowanegoUzytkownika;
 public:
     KsiazkaAdresowa();
     void rejestracjaUzytkownika();
-    void logowanieUzytkownika();
     void wyswietlWszystkichUzytkownikow();
+    int logowanieUzytkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
-    void dodajAdresata();
+    void dodajAdresata(int IdZalogowanegoUzytkownika);
     void wyswietlWszystkichAdresatow();
 };
 

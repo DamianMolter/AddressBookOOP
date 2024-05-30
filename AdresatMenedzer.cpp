@@ -9,22 +9,22 @@ AdresatMenedzer :: AdresatMenedzer(){
     }
 }
 
-int AdresatMenedzer :: dodajAdresata()
+int AdresatMenedzer :: dodajAdresata(int IdZalogowanegoUzytkownika)
 {
     PlikZAdresatami plikZAdresatami;
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-    adresat = podajDaneNowegoAdresata();
+    adresat = podajDaneNowegoAdresata(IdZalogowanegoUzytkownika);
     adresaci.push_back(adresat);
     plikZAdresatami.dopiszAdresataDoPliku(adresat);
 
     return idOstatniegoAdresata + 1;
 }
 
-Adresat AdresatMenedzer :: podajDaneNowegoAdresata()
+Adresat AdresatMenedzer :: podajDaneNowegoAdresata(int IdZalogowanegoUzytkownika)
 {
     adresat.ustawId(pobierzIdNowegoAdresata());
-    adresat.ustawIdUzytkownika(uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
+    adresat.ustawIdUzytkownika(IdZalogowanegoUzytkownika);
 
     cout << "Podaj imie: ";
     adresat.ustawImie(MetodyPomocnicze :: zamienPierwszaLitereNaDuzaAPozostaleNaMale(MetodyPomocnicze :: wczytajLinie()));
