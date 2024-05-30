@@ -12,9 +12,9 @@ void KsiazkaAdresowa::rejestracjaUzytkownika(){
 
 }
 
-void KsiazkaAdresowa :: logowanieUzytkownika(){
+int KsiazkaAdresowa :: logowanieUzytkownika(){
 
-    uzytkownikMenedzer.logowanieUzytkownika();
+    return uzytkownikMenedzer.logowanieUzytkownika();
 
 }
 
@@ -29,13 +29,26 @@ void KsiazkaAdresowa :: zmianaHaslaZalogowanegoUzytkownika(){
 
 }
 
-void KsiazkaAdresowa :: dodajAdresata(){
+void KsiazkaAdresowa :: dodajAdresata(int IdZalogowanegoUzytkownika){
 
-    adresatMenedzer.dodajAdresata();
+    adresatMenedzer.dodajAdresata(IdZalogowanegoUzytkownika);
 
 }
 
 void KsiazkaAdresowa :: wyswietlWszystkichAdresatow(){
 
     adresatMenedzer.wyswietlWszystkichAdresatow();
+}
+
+void KsiazkaAdresowa :: wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika){
+
+    adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
+
+}
+
+int KsiazkaAdresowa :: wylogowanieUzytkownika(){
+    idZalogowanegoUzytkownika = 0;
+    cout << "Pomyslnie wylogowano." << endl;
+    cout << idZalogowanegoUzytkownika << endl;
+    return idZalogowanegoUzytkownika;
 }

@@ -9,22 +9,21 @@ AdresatMenedzer :: AdresatMenedzer(){
     }
 }
 
-int AdresatMenedzer :: dodajAdresata()
+int AdresatMenedzer :: dodajAdresata(int idZalogowanegoUzytkownika)
 {
-    PlikZAdresatami plikZAdresatami;
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-    adresat = podajDaneNowegoAdresata();
+    adresat = podajDaneNowegoAdresata(idZalogowanegoUzytkownika);
     adresaci.push_back(adresat);
     plikZAdresatami.dopiszAdresataDoPliku(adresat);
 
     return idOstatniegoAdresata + 1;
 }
 
-Adresat AdresatMenedzer :: podajDaneNowegoAdresata()
+Adresat AdresatMenedzer :: podajDaneNowegoAdresata(int idZalogowanegoUzytkownika)
 {
     adresat.ustawId(pobierzIdNowegoAdresata());
-    adresat.ustawIdUzytkownika(uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
+    adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
 
     cout << "Podaj imie: ";
     adresat.ustawImie(MetodyPomocnicze :: zamienPierwszaLitereNaDuzaAPozostaleNaMale(MetodyPomocnicze :: wczytajLinie()));
@@ -45,10 +44,15 @@ Adresat AdresatMenedzer :: podajDaneNowegoAdresata()
 }
 
 int AdresatMenedzer :: pobierzIdNowegoAdresata() {
-    if (adresaci.empty() == true)
-        return 1;
-    else
-        return adresaci.back().pobierzId() + 1;
+    fstream plikZAdresatami;
+    plikZAdresatami.open("Adresaci.txt", ios::in);
+    int idOstatniegoAdresata = 1;
+    string linia = "";
+    while(getline(plikZAdresatami, linia)){
+        idOstatniegoAdresata++;
+    }
+    plikZAdresatami.close();
+    return idOstatniegoAdresata;
 }
 
 void AdresatMenedzer :: wyswietlWszystkichAdresatow()
@@ -80,4 +84,10 @@ void AdresatMenedzer :: wyswietlDaneAdresata(size_t index)
     cout << "Numer telefonu:     " << adresaci[index].pobierzNumerTelefonu() << endl;
     cout << "Email:              " << adresaci[index].pobierzEmail() << endl;
     cout << "Adres:              " << adresaci[index].pobierzAdres() << endl << endl;
+}
+
+void AdresatMenedzer :: wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika){
+
+    adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
+
 }
