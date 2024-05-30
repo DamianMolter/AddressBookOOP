@@ -6,6 +6,10 @@ KsiazkaAdresowa :: KsiazkaAdresowa(){
 
 }
 
+int KsiazkaAdresowa :: pobierzIdOstatniegoAdresata(){
+    return idOstatniegoAdresata;
+}
+
 void KsiazkaAdresowa::rejestracjaUzytkownika(){
 
     uzytkownikMenedzer.rejestracjaUzytkownika();
@@ -38,4 +42,10 @@ void KsiazkaAdresowa :: dodajAdresata(int IdZalogowanegoUzytkownika){
 void KsiazkaAdresowa :: wyswietlWszystkichAdresatow(){
 
     adresatMenedzer.wyswietlWszystkichAdresatow();
+}
+
+void KsiazkaAdresowa :: wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika){
+
+    adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
+
 }
