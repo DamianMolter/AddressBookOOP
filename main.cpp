@@ -1,5 +1,6 @@
 #include <iostream>
 #include "KsiazkaAdresowa.h"
+#include "windows.h"
 
 using namespace std;
 
@@ -10,6 +11,7 @@ int main() {
     ksiazkaAdresowa.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
     ksiazkaAdresowa.dodajAdresata(idZalogowanegoUzytkownika);
     ksiazkaAdresowa.wyswietlWszystkichAdresatow();
+    idZalogowanegoUzytkownika = ksiazkaAdresowa.wylogowanieUzytkownika();
 
     return 0;
 }

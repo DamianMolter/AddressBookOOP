@@ -14,7 +14,6 @@ class KsiazkaAdresowa {
     int idOstatniegoAdresata;
 public:
     KsiazkaAdresowa();
-    int pobierzIdOstatniegoAdresata();
     void rejestracjaUzytkownika();
     void wyswietlWszystkichUzytkownikow();
     int logowanieUzytkownika();
@@ -22,6 +21,7 @@ public:
     void dodajAdresata(int idZalogowanegoUzytkownika);
     void wyswietlWszystkichAdresatow();
     void wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
+    int wylogowanieUzytkownika();
 };
 
 #endif

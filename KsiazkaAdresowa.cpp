@@ -6,10 +6,6 @@ KsiazkaAdresowa :: KsiazkaAdresowa(){
 
 }
 
-int KsiazkaAdresowa :: pobierzIdOstatniegoAdresata(){
-    return idOstatniegoAdresata;
-}
-
 void KsiazkaAdresowa::rejestracjaUzytkownika(){
 
     uzytkownikMenedzer.rejestracjaUzytkownika();
@@ -48,4 +44,11 @@ void KsiazkaAdresowa :: wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalo
 
     adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
 
+}
+
+int KsiazkaAdresowa :: wylogowanieUzytkownika(){
+    idZalogowanegoUzytkownika = 0;
+    cout << "Pomyslnie wylogowano." << endl;
+    cout << idZalogowanegoUzytkownika << endl;
+    return idZalogowanegoUzytkownika;
 }
