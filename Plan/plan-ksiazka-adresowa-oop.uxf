@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>20</y>
+      <w>350</w>
+      <h>510</h>
+    </coordinates>
+    <panel_attributes>KsiazkaAdresowa
+--
+uzytkownikMenedzer : UzytkownikMenedzer
+adresatMenedzer : AdresatMenedzer
+--
+KsiazkaAdresowa()
++logowanieUzytkownika() : int
++rejestracjaUzytkownika() : void
++wyswietlWszystkichUzytkownikow() : void
++zmianaHaslaZalogowanegoUzytkownika() : void
++dodajAdresata() : void
++wyswietlWszystkichAdresatow() : void
++wczytajAdresatowZalogowanegoUzytkownikaZPliku(): void
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1260</x>
+      <y>20</y>
+      <w>150</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Uzytkownik
+--
+id : integer
+login : string
+haslo : string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>20</y>
+      <w>440</w>
+      <h>560</h>
+    </coordinates>
+    <panel_attributes>PlikZUzytkownikami
+--
+nazwaPlikuZUzytkownikami : string
+plikTekstowy : fstream
+
+--
+
+PlikZUzytkownikami()
++dopiszUzytkownikaDoPliku() : void
++wczytajUzyktownikowZPliku() : void
++zapiszWszystkichUzytkownikowDoPliku() : void
+-pobierzDaneUzytkownika() : void
+-czyPlikJestPusty() : bool
+-zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami() : string()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1260</x>
+      <y>180</y>
+      <w>240</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>MetodyPomocnicze
+--
++konwerjsaIntNaString() : string
++konwersjaStringNaInt() : integer
++pobierzLiczbe() : string
++wczytajLinie() : string
++zamienPierwszaLitereNaDuzaAPozostaleNaMale() : string
++czyPlikJestPusty() : bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>570</y>
+      <w>300</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>AdresatMenedzer
+--
+adresaci : vector &lt;Adresat&gt; 
+idOstatniegoAdresata : integer
+idZalogowanegoUzytkownika : integer
+idOstatniegoAdresata : integer
+--
+AdresatMenedzer()
++dodajAdresata() : int
++wyswietlWszystkichAdresatow() : void
+-podajDaneNowegoAdresata() : Adresat
+-wyswietlDaneAdresata() : void
+-pobierzIdNowegoAdresata() : int
+-wyswietlDaneAdresata() : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>20</y>
+      <w>470</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>UzytkownikMenedzer
+--
+idZalogowanegoUzytkownika : integer
+uzytkownik : Uzytkownik
+uzytkownicy : vector &lt;Uzytkownik&gt;
+--
++rejestracjaUzytkownika() : void
++logowanieUzytkownika() : integer
++zmianaHaslaZalogowanegoUzytkownika() : void
++wyswietlWszystkichUzytkownikow() : void
++wczytajUzyktownikowZPliku() : void
+-podajDaneNowegoUzytkownika() : Uzytkownik
+-pobierzIdNowegoUzytkownika() : integer
+-czyIstniejeLogin() : bool
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>570</y>
+      <w>420</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>PlikZAdresatami
+--
+PlikZAdresatami()
++dopiszAdresataDoPliku() : void
++wczytajAdresatowZalogowanegoUzytkownikaZPliku() : integer
+-pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami() : integer
+-pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(): integer
+-zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(): string
+-pobierzDaneAdresata(): Adresat
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>600</y>
+      <w>180</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Adresat
+--
+id : int
+imie : string
+nazwisko : string
+numerTelefonu : string
+email : string
+adres : string</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

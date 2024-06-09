@@ -34,7 +34,6 @@
 # Files with contancts
 ks-strukt.cpp
 bin/
-Plan/
 obj/
 KsiazkaAdresowa.cbp
 KsiazkaAdresowa.depend
