@@ -122,3 +122,15 @@ void UzytkownikMenedzer :: zapiszWszystkichUzytkownikowDoPliku(){
     PlikZUzytkownikami plikZUzytkownikami;
     plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
 }
+
+bool UzytkownikMenedzer :: czyUzytkownikJestZalogowany(){
+    if(idZalogowanegoUzytkownika > 0){
+        return true;
+    } else {
+        return false;
+    }
+};
+
+void UzytkownikMenedzer :: wylogowanieUzytkownika(){
+    idZalogowanegoUzytkownika = 0;
+};

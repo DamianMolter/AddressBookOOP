@@ -1,10 +1,5 @@
 #include "KsiazkaAdresowa.h"
 
-KsiazkaAdresowa :: KsiazkaAdresowa(){
-
-    uzytkownikMenedzer.wczytajUzytkownikowZPliku();
-
-}
 
 void KsiazkaAdresowa::rejestracjaUzytkownika(){
 
@@ -12,9 +7,13 @@ void KsiazkaAdresowa::rejestracjaUzytkownika(){
 
 }
 
-int KsiazkaAdresowa :: logowanieUzytkownika(){
+void KsiazkaAdresowa :: logowanieUzytkownika(){
 
-    return uzytkownikMenedzer.logowanieUzytkownika();
+   uzytkownikMenedzer.logowanieUzytkownika();
+
+   if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()){
+        adresatMenedzer = new AdresatMenedzer(uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
+   }
 
 }
 
@@ -29,26 +28,23 @@ void KsiazkaAdresowa :: zmianaHaslaZalogowanegoUzytkownika(){
 
 }
 
-void KsiazkaAdresowa :: dodajAdresata(int IdZalogowanegoUzytkownika){
+void KsiazkaAdresowa :: dodajAdresata(){
 
-    adresatMenedzer.dodajAdresata(IdZalogowanegoUzytkownika);
-
+    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()){
+        adresatMenedzer->dodajAdresata();
+   }
 }
 
 void KsiazkaAdresowa :: wyswietlWszystkichAdresatow(){
 
-    adresatMenedzer.wyswietlWszystkichAdresatow();
+    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()){
+        adresatMenedzer->wyswietlWszystkichAdresatow();
+   }
 }
 
-void KsiazkaAdresowa :: wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika){
-
-    adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
-
-}
-
-int KsiazkaAdresowa :: wylogowanieUzytkownika(){
-    idZalogowanegoUzytkownika = 0;
-    cout << "Pomyslnie wylogowano." << endl;
-    cout << idZalogowanegoUzytkownika << endl;
-    return idZalogowanegoUzytkownika;
+void KsiazkaAdresowa :: wylogowanieUzytkownika(){
+    uzytkownikMenedzer.wylogowanieUzytkownika();
+    delete adresatMenedzer;
+    adresatMenedzer = NULL;
+    cout << "Pomyslnie wylogowao." << endl;
 }

@@ -9,19 +9,25 @@ using namespace std;
 
 class KsiazkaAdresowa {
     UzytkownikMenedzer uzytkownikMenedzer;
-    AdresatMenedzer adresatMenedzer;
+    AdresatMenedzer *adresatMenedzer;
     int idZalogowanegoUzytkownika;
     int idOstatniegoAdresata;
 public:
-    KsiazkaAdresowa();
+    KsiazkaAdresowa(){
+        adresatMenedzer = NULL;
+    };
+    ~KsiazkaAdresowa(){
+        delete adresatMenedzer;
+        adresatMenedzer = NULL;
+    }
     void rejestracjaUzytkownika();
     void wyswietlWszystkichUzytkownikow();
-    int logowanieUzytkownika();
+    void logowanieUzytkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
-    void dodajAdresata(int idZalogowanegoUzytkownika);
+    void dodajAdresata();
     void wyswietlWszystkichAdresatow();
-    void wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
-    int wylogowanieUzytkownika();
+    void wczytajAdresatowZalogowanegoUzytkownikaZPliku();
+    void wylogowanieUzytkownika();
 };
 
 #endif
