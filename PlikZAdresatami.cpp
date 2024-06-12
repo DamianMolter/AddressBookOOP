@@ -2,7 +2,22 @@
 
 PlikZAdresatami::PlikZAdresatami(){
 
+    idOstatniegoAdresata = 0;
     nazwaPlikuZAdresatami = "Adresaci.txt";
+}
+
+
+int PlikZAdresatami :: pobierzIdNowegoAdresata() {
+    fstream plikZAdresatami;
+    plikZAdresatami.open("Adresaci.txt", ios::in);
+    int idOstatniegoAdresata = 0;
+    string linia = "";
+    while(getline(plikZAdresatami, linia)){
+        size_t pozycjaPierwszejPionowejKreski = linia.find('|');
+        idOstatniegoAdresata = stoi(linia.substr(0, pozycjaPierwszejPionowejKreski));
+    }
+    plikZAdresatami.close();
+    return idOstatniegoAdresata + 1;
 }
 
 void PlikZAdresatami :: dopiszAdresataDoPliku(Adresat adresat){

@@ -20,11 +20,17 @@ class UzytkownikMenedzer{
     bool czyIstniejeLogin(string login);
     void zapiszWszystkichUzytkownikowDoPliku();
 public:
+    UzytkownikMenedzer(){
+        idZalogowanegoUzytkownika = 0;
+        wczytajUzytkownikowZPliku();
+    };
+    bool czyUzytkownikJestZalogowany();
     int pobierzIdZalogowanegoUzytkownika();
     void rejestracjaUzytkownika();
     void wyswietlWszystkichUzytkownikow();
     void wczytajUzytkownikowZPliku();
     int logowanieUzytkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
+    void wylogowanieUzytkownika();
 };
 #endif

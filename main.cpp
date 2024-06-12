@@ -7,11 +7,10 @@ using namespace std;
 int main() {
     KsiazkaAdresowa ksiazkaAdresowa;
     ksiazkaAdresowa.wyswietlWszystkichUzytkownikow();
-    int idZalogowanegoUzytkownika = ksiazkaAdresowa.logowanieUzytkownika();
-    ksiazkaAdresowa.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
-    ksiazkaAdresowa.dodajAdresata(idZalogowanegoUzytkownika);
+    ksiazkaAdresowa.logowanieUzytkownika();
+    ksiazkaAdresowa.dodajAdresata();
     ksiazkaAdresowa.wyswietlWszystkichAdresatow();
-    idZalogowanegoUzytkownika = ksiazkaAdresowa.wylogowanieUzytkownika();
+    ksiazkaAdresowa.wylogowanieUzytkownika();
 
     return 0;
 }
