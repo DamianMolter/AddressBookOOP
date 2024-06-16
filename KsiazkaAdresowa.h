@@ -10,7 +10,6 @@ using namespace std;
 class KsiazkaAdresowa {
     UzytkownikMenedzer uzytkownikMenedzer;
     AdresatMenedzer *adresatMenedzer;
-    int idZalogowanegoUzytkownika;
     int idOstatniegoAdresata;
 public:
     KsiazkaAdresowa(){
