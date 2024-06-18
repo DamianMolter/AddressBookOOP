@@ -14,7 +14,6 @@ using namespace std;
 
 class AdresatMenedzer {
 
-    //UzytkownikMenedzer uzytkownikMenedzer;
     PlikZAdresatami plikZAdresatami;
     const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
     int idOstatniegoAdresata;
