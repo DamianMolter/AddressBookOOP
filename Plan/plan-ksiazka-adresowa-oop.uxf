@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>20</y>
+      <y>0</y>
       <w>350</w>
       <h>510</h>
     </coordinates>
@@ -22,7 +22,10 @@ KsiazkaAdresowa()
 +dodajAdresata() : void
 +wyswietlWszystkichAdresatow() : void
 +wczytajAdresatowZalogowanegoUzytkownikaZPliku(): void
-
++wylogowanieUzytkownika() : void
++czyUzytkownikJestZalogowany() : bool
++wybierzOpcjeZMenuGlownego() : char
++wybierzOpcjeZMenuUzytkownika() : char
 
 
 
@@ -33,7 +36,7 @@ KsiazkaAdresowa()
     <id>UMLClass</id>
     <coordinates>
       <x>1260</x>
-      <y>20</y>
+      <y>0</y>
       <w>150</w>
       <h>160</h>
     </coordinates>
@@ -48,7 +51,7 @@ haslo : string</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>820</x>
-      <y>20</y>
+      <y>0</y>
       <w>440</w>
       <h>560</h>
     </coordinates>
@@ -56,6 +59,7 @@ haslo : string</panel_attributes>
 --
 nazwaPlikuZUzytkownikami : string
 plikTekstowy : fstream
+daneJednegoUzytkownikaOddzielonePionowymiKreskami : string
 
 --
 
@@ -64,7 +68,6 @@ PlikZUzytkownikami()
 +wczytajUzyktownikowZPliku() : void
 +zapiszWszystkichUzytkownikowDoPliku() : void
 -pobierzDaneUzytkownika() : void
--czyPlikJestPusty() : bool
 -zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami() : string()
 </panel_attributes>
     <additional_attributes/>
@@ -73,7 +76,7 @@ PlikZUzytkownikami()
     <id>UMLClass</id>
     <coordinates>
       <x>1260</x>
-      <y>180</y>
+      <y>160</y>
       <w>240</w>
       <h>350</h>
     </coordinates>
@@ -84,22 +87,24 @@ PlikZUzytkownikami()
 +pobierzLiczbe() : string
 +wczytajLinie() : string
 +zamienPierwszaLitereNaDuzaAPozostaleNaMale() : string
-+czyPlikJestPusty() : bool</panel_attributes>
++czyPlikJestPusty() : bool
++wczytajZnak() : char</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>10</x>
-      <y>570</y>
+      <y>550</y>
       <w>300</w>
       <h>280</h>
     </coordinates>
     <panel_attributes>AdresatMenedzer
 --
+plikZAdresatami : PlikZAdresatami
 adresaci : vector &lt;Adresat&gt; 
 idOstatniegoAdresata : integer
-idZalogowanegoUzytkownika : integer
+ID_ZALOGOWANEGO_UZYTKOWNIKA : const integer
 idOstatniegoAdresata : integer
 --
 AdresatMenedzer()
@@ -109,6 +114,8 @@ AdresatMenedzer()
 -wyswietlDaneAdresata() : void
 -pobierzIdNowegoAdresata() : int
 -wyswietlDaneAdresata() : void
+-podajDaneNowegoAdresata() : Adresat
+-wyswietlDaneAdresata() : void
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -116,7 +123,7 @@ AdresatMenedzer()
     <id>UMLClass</id>
     <coordinates>
       <x>350</x>
-      <y>20</y>
+      <y>0</y>
       <w>470</w>
       <h>540</h>
     </coordinates>
@@ -126,14 +133,20 @@ idZalogowanegoUzytkownika : integer
 uzytkownik : Uzytkownik
 uzytkownicy : vector &lt;Uzytkownik&gt;
 --
+UzytkownikMenedzer()
++czyUzytkownikJestZalogowany() : bool
++pobierzIdZalogowanegoUzytkownika() : integer
 +rejestracjaUzytkownika() : void
 +logowanieUzytkownika() : integer
 +zmianaHaslaZalogowanegoUzytkownika() : void
 +wyswietlWszystkichUzytkownikow() : void
 +wczytajUzyktownikowZPliku() : void
++wylogowanieUzytkownika() : void
 -podajDaneNowegoUzytkownika() : Uzytkownik
 -pobierzIdNowegoUzytkownika() : integer
 -czyIstniejeLogin() : bool
+-zapiszWszystkichUzytkownikowDoPliku() : void
+
 
 </panel_attributes>
     <additional_attributes/>
@@ -142,19 +155,26 @@ uzytkownicy : vector &lt;Uzytkownik&gt;
     <id>UMLClass</id>
     <coordinates>
       <x>310</x>
-      <y>570</y>
+      <y>550</y>
       <w>420</w>
       <h>270</h>
     </coordinates>
     <panel_attributes>PlikZAdresatami
 --
+adresat : Adresat
+nazwaPlikuZAdresatami : string
+idOstatniegoAdresata : size_t
+--
 PlikZAdresatami()
 +dopiszAdresataDoPliku() : void
 +wczytajAdresatowZalogowanegoUzytkownikaZPliku() : integer
++pobierzIdNowegoAdresata() : integer
 -pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami() : integer
 -pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(): integer
 -zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(): string
 -pobierzDaneAdresata(): Adresat
+-pobierzIdAdresataZDanychOddzielonychPionowymiKreskami() : integer
+-pobierzIdOstatniegoAdresata() : integer
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -162,7 +182,7 @@ PlikZAdresatami()
     <id>UMLClass</id>
     <coordinates>
       <x>810</x>
-      <y>600</y>
+      <y>580</y>
       <w>180</w>
       <h>140</h>
     </coordinates>
@@ -173,7 +193,9 @@ imie : string
 nazwisko : string
 numerTelefonu : string
 email : string
-adres : string</panel_attributes>
+adres : string
+--
+Adresat()</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
