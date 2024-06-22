@@ -17,5 +17,6 @@ public:
     static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
     static bool czyPlikJestPusty();
     static char wczytajZnak();
+    static int wczytajLiczbeCalkowita();
 };
 #endif

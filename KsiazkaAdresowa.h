@@ -30,6 +30,7 @@ public:
     char wybierzOpcjeZMenuUzytkownika();
     void wyszukajAdresatowPoImieniu();
     void wyszukajAdresatowPoNazwisku();
+    void usunAdresata();
 };
 
 #endif
