@@ -12,7 +12,7 @@
 using namespace std;
 
 class UzytkownikMenedzer {
-    Uzytkownik uzytkownik;
+    PlikZUzytkownikami plikZUzytkownikami;
     int idZalogowanegoUzytkownika;
     vector <Uzytkownik> uzytkownicy;
     Uzytkownik podajDaneNowegoUzytkownika();
@@ -20,7 +20,7 @@ class UzytkownikMenedzer {
     bool czyIstniejeLogin(string login);
     void zapiszWszystkichUzytkownikowDoPliku();
 public:
-    UzytkownikMenedzer() {
+    UzytkownikMenedzer(string nazwaPlikuZUzytkownikami) : plikZUzytkownikami(nazwaPlikuZUzytkownikami) {
         idZalogowanegoUzytkownika = 0;
         wczytajUzytkownikowZPliku();
     };
