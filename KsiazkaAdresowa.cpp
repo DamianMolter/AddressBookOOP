@@ -20,7 +20,7 @@ void KsiazkaAdresowa :: logowanieUzytkownika() {
     uzytkownikMenedzer.logowanieUzytkownika();
 
     if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
-        adresatMenedzer = new AdresatMenedzer(uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
+        adresatMenedzer = new AdresatMenedzer(uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika(), NAZWA_PLIKU_Z_ADRESATAMI);
     }
 
 }

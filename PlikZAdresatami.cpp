@@ -1,16 +1,8 @@
 #include "PlikZAdresatami.h"
 
-PlikZAdresatami::PlikZAdresatami() {
-
-    idOstatniegoAdresata = 0;
-    nazwaPlikuZAdresatami = "Adresaci.txt";
-    nazwaTymczasowegoPlikuZAdresatami = "Adresaci_temp.txt";
-}
-
-
 int PlikZAdresatami :: pobierzIdNowegoAdresata() {
     fstream plikZAdresatami;
-    plikZAdresatami.open("Adresaci.txt", ios::in);
+    plikZAdresatami.open(nazwaPlikuZAdresatami.c_str(), ios::in);
     int idOstatniegoAdresata = 0;
     string linia = "";
     while(getline(plikZAdresatami, linia)) {
