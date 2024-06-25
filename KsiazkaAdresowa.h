@@ -11,7 +11,7 @@ class KsiazkaAdresowa {
     UzytkownikMenedzer uzytkownikMenedzer;
     AdresatMenedzer *adresatMenedzer;
 public:
-    KsiazkaAdresowa() {
+    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami) : uzytkownikMenedzer(nazwaPlikuZUzytkownikami) {
         adresatMenedzer = NULL;
     };
     ~KsiazkaAdresowa() {

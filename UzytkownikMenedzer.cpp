@@ -5,9 +5,9 @@ int UzytkownikMenedzer :: pobierzIdZalogowanegoUzytkownika() {
 }
 
 void UzytkownikMenedzer :: rejestracjaUzytkownika() {
-    Uzytkownik uzytkownik = podajDaneNowegoUzytkownika();
+    Uzytkownik uzytkownik;
+    uzytkownik = podajDaneNowegoUzytkownika();
     uzytkownicy.push_back(uzytkownik);
-    PlikZUzytkownikami plikZUzytkownikami;
     plikZUzytkownikami.dopiszUzytkownikaDoPliku(uzytkownik);
 
     cout << "Konto zalozono pomyslnie" << endl << endl;
@@ -44,7 +44,7 @@ void UzytkownikMenedzer :: wyswietlWszystkichUzytkownikow() {
 }
 Uzytkownik UzytkownikMenedzer :: podajDaneNowegoUzytkownika() {
     string login, haslo;
-
+    Uzytkownik uzytkownik;
     uzytkownik.ustawId(pobierzIdNowegoUzytkownika());
 
     do {
@@ -61,7 +61,6 @@ Uzytkownik UzytkownikMenedzer :: podajDaneNowegoUzytkownika() {
 }
 
 void UzytkownikMenedzer :: wczytajUzytkownikowZPliku() {
-    PlikZUzytkownikami plikZUzytkownikami;
     uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
 }
 
@@ -111,7 +110,7 @@ void UzytkownikMenedzer :: zmianaHaslaZalogowanegoUzytkownika() {
 }
 
 void UzytkownikMenedzer :: zapiszWszystkichUzytkownikowDoPliku() {
-    PlikZUzytkownikami plikZUzytkownikami;
+
     plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
 }
 

@@ -1,10 +1,5 @@
 #include "PlikZUzytkownikami.h"
 
-PlikZUzytkownikami::PlikZUzytkownikami() {
-
-    nazwaPlikuZUzytkownikami = "Uzytkownicy.txt";
-}
-
 string PlikZUzytkownikami :: zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik) {
     string liniaZDanymiUzytkownika = "";
 
@@ -94,3 +89,5 @@ void PlikZUzytkownikami :: zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkowni
     }
     plikTekstowy.close();
 }
+
+
