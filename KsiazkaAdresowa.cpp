@@ -1,63 +1,63 @@
 #include "KsiazkaAdresowa.h"
 
 
-void KsiazkaAdresowa::rejestracjaUzytkownika(){
+void KsiazkaAdresowa::rejestracjaUzytkownika() {
 
     uzytkownikMenedzer.rejestracjaUzytkownika();
 
 }
 
-bool KsiazkaAdresowa :: czyUzytkownikJestZalogowany(){
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()){
+bool KsiazkaAdresowa :: czyUzytkownikJestZalogowany() {
+    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
         return true;
     } else {
         return false;
     }
 }
 
-void KsiazkaAdresowa :: logowanieUzytkownika(){
+void KsiazkaAdresowa :: logowanieUzytkownika() {
 
-   uzytkownikMenedzer.logowanieUzytkownika();
+    uzytkownikMenedzer.logowanieUzytkownika();
 
-   if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()){
+    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
         adresatMenedzer = new AdresatMenedzer(uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
-   }
+    }
 
 }
 
-void KsiazkaAdresowa :: wyswietlWszystkichUzytkownikow(){
+void KsiazkaAdresowa :: wyswietlWszystkichUzytkownikow() {
 
     uzytkownikMenedzer.wyswietlWszystkichUzytkownikow();
 }
 
-void KsiazkaAdresowa :: zmianaHaslaZalogowanegoUzytkownika(){
+void KsiazkaAdresowa :: zmianaHaslaZalogowanegoUzytkownika() {
 
     uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika();
 
 }
 
-void KsiazkaAdresowa :: dodajAdresata(){
+void KsiazkaAdresowa :: dodajAdresata() {
 
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()){
+    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
         adresatMenedzer->dodajAdresata();
-   }
+    }
 }
 
-void KsiazkaAdresowa :: wyswietlWszystkichAdresatow(){
+void KsiazkaAdresowa :: wyswietlWszystkichAdresatow() {
 
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()){
+    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
         adresatMenedzer->wyswietlWszystkichAdresatow();
-   }
+    }
 }
 
-void KsiazkaAdresowa :: wylogowanieUzytkownika(){
+void KsiazkaAdresowa :: wylogowanieUzytkownika() {
     uzytkownikMenedzer.wylogowanieUzytkownika();
     delete adresatMenedzer;
     adresatMenedzer = NULL;
     cout << "Pomyslnie wylogowao." << endl;
 }
 
-char KsiazkaAdresowa :: wybierzOpcjeZMenuGlownego(){
+char KsiazkaAdresowa :: wybierzOpcjeZMenuGlownego() {
     char wybor;
 
     system("cls");
@@ -73,7 +73,7 @@ char KsiazkaAdresowa :: wybierzOpcjeZMenuGlownego(){
     return wybor;
 }
 
-char KsiazkaAdresowa :: wybierzOpcjeZMenuUzytkownika(){
+char KsiazkaAdresowa :: wybierzOpcjeZMenuUzytkownika() {
     char wybor;
 
     system("cls");
@@ -95,18 +95,22 @@ char KsiazkaAdresowa :: wybierzOpcjeZMenuUzytkownika(){
     return wybor;
 }
 
-void KsiazkaAdresowa :: wyszukajAdresatowPoImieniu(){
+void KsiazkaAdresowa :: wyszukajAdresatowPoImieniu() {
 
     adresatMenedzer->wyszukajAdresatowPoImieniu();
 
 }
 
-void KsiazkaAdresowa :: wyszukajAdresatowPoNazwisku(){
+void KsiazkaAdresowa :: wyszukajAdresatowPoNazwisku() {
 
     adresatMenedzer->wyszukajAdresatowPoNazwisku();
 
 }
 
-void KsiazkaAdresowa :: usunAdresata(){
+void KsiazkaAdresowa :: usunAdresata() {
     adresatMenedzer->usunAdresata();
+}
+
+void KsiazkaAdresowa :: edytujAdresata() {
+    adresatMenedzer->edytujAdresata();
 }

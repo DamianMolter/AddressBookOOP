@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="15.1">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -34,8 +34,8 @@ KsiazkaAdresowa()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1260</x>
-      <y>0</y>
+      <x>1280</x>
+      <y>10</y>
       <w>150</w>
       <h>160</h>
     </coordinates>
@@ -49,7 +49,7 @@ haslo : string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>820</x>
+      <x>840</x>
       <y>0</y>
       <w>440</w>
       <h>560</h>
@@ -74,8 +74,8 @@ PlikZUzytkownikami()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1260</x>
-      <y>160</y>
+      <x>1320</x>
+      <y>550</y>
       <w>240</w>
       <h>350</h>
     </coordinates>
@@ -87,7 +87,8 @@ PlikZUzytkownikami()
 +wczytajLinie() : string
 +zamienPierwszaLitereNaDuzaAPozostaleNaMale() : string
 +czyPlikJestPusty() : bool
-+wczytajZnak() : char</panel_attributes>
++wczytajZnak() : char
++wczytajLiczbeCalkowita() : integer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -117,6 +118,8 @@ AdresatMenedzer()
 -wyswietlDaneAdresata() : void
 -podajIdWybranegoAdresata() : integer
 +usunAdresata() : void
++edytujAdresata() : void
+-wybierzOpcjeZMenuEdycja() : char
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -147,6 +150,7 @@ PlikZAdresatami()
 -usunPlik() : void
 -zmienNazwePliku() : void
 +usunWybranaLinieWPliku() : void
++zaktualizujDaneWybranegoAdresata() : void
 </panel_attributes>
     <additional_attributes/>
   </element>
