@@ -11,10 +11,10 @@ class KsiazkaAdresowa {
     UzytkownikMenedzer uzytkownikMenedzer;
     AdresatMenedzer *adresatMenedzer;
 public:
-    KsiazkaAdresowa(){
+    KsiazkaAdresowa() {
         adresatMenedzer = NULL;
     };
-    ~KsiazkaAdresowa(){
+    ~KsiazkaAdresowa() {
         delete adresatMenedzer;
         adresatMenedzer = NULL;
     }
@@ -31,6 +31,7 @@ public:
     void wyszukajAdresatowPoImieniu();
     void wyszukajAdresatowPoNazwisku();
     void usunAdresata();
+    void edytujAdresata();
 };
 
 #endif

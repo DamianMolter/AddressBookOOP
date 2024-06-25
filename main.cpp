@@ -8,13 +8,11 @@ int main() {
 
     KsiazkaAdresowa ksiazkaAdresowa;
 
-    while (true)
-    {
-        if (!ksiazkaAdresowa.czyUzytkownikJestZalogowany()){
+    while (true) {
+        if (!ksiazkaAdresowa.czyUzytkownikJestZalogowany()) {
             char wybor = ksiazkaAdresowa.wybierzOpcjeZMenuGlownego();
 
-            switch (wybor)
-            {
+            switch (wybor) {
             case '1':
                 ksiazkaAdresowa.rejestracjaUzytkownika();
                 break;
@@ -29,13 +27,10 @@ int main() {
                 system("pause");
                 break;
             }
-        }
-        else
-        {
+        } else {
             char wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
 
-            switch (wybor)
-            {
+            switch (wybor) {
             case '1':
                 ksiazkaAdresowa.dodajAdresata();
                 break;
@@ -51,9 +46,9 @@ int main() {
             case '5':
                 ksiazkaAdresowa.usunAdresata();
                 break;
-            //case '6':
-                //edytujAdresata(adresaci);
-                //break;
+            case '6':
+                ksiazkaAdresowa.edytujAdresata();
+                break;
             case '7':
                 ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
                 break;

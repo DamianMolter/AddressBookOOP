@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class PlikZAdresatami{
+class PlikZAdresatami {
     Adresat adresat;
     string nazwaPlikuZAdresatami;
     size_t idOstatniegoAdresata;
@@ -26,4 +26,6 @@ public:
     vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
     int pobierzIdNowegoAdresata();
     void usunWybranaLinieWPliku(int idUsuwanegoAdresata);
+    void edytujWybranaLinieWPliku(string liniaZDanymiAdresataOddzielonePionowymiKreskami, int idEdytowanegoAdresata);
+    void zaktualizujDaneWybranegoAdresata(Adresat adresat, int idEdytowanegoAdresata);
 };

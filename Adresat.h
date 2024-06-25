@@ -4,20 +4,12 @@
 
 using namespace std;
 
-class Adresat{
+class Adresat {
 
     int id, idUzytkownika;
     string imie, nazwisko, numerTelefonu, email, adres;
 public:
-    int pobierzId();
-    int pobierzIdUzytkownika();
-    string pobierzImie();
-    string pobierzNazwisko();
-    string pobierzNumerTelefonu();
-    string pobierzEmail();
-    string pobierzAdres();
-
-    Adresat(int id=0, int idUzytkownika=0, string imie="", string nazwisko="", string numerTelefonu="", string email="", string adres=""){
+    Adresat(int id=0, int idUzytkownika=0, string imie="", string nazwisko="", string numerTelefonu="", string email="", string adres="") {
         this->id=id;
         this->idUzytkownika=idUzytkownika;
         this->imie=imie;
@@ -26,7 +18,13 @@ public:
         this->email=email;
         this->adres=adres;
     }
-
+    int pobierzId();
+    int pobierzIdUzytkownika();
+    string pobierzImie();
+    string pobierzNazwisko();
+    string pobierzNumerTelefonu();
+    string pobierzEmail();
+    string pobierzAdres();
     void ustawId(int noweId);
     void ustawIdUzytkownika(int noweIdUzytkownika);
     void ustawImie(string noweImie);
