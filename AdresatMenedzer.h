@@ -24,7 +24,7 @@ class AdresatMenedzer {
     int podajIdWybranegoAdresata();
     char wybierzOpcjeZMenuEdycja();
 public:
-    AdresatMenedzer(int idZalogowanegoUzytkownika): ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika) {
+    AdresatMenedzer(int idZalogowanegoUzytkownika, string nazwaPlikuZAdresatami): plikZAdresatami(nazwaPlikuZAdresatami), ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika) {
         adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
     };
     int dodajAdresata();
