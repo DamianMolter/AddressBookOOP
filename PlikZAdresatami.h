@@ -5,12 +5,12 @@
 #include "UzytkownikMenedzer.h"
 #include "MetodyPomocnicze.h"
 #include "Adresat.h"
+#include "PlikTekstowy.h"
 
 using namespace std;
 
-class PlikZAdresatami {
+class PlikZAdresatami : protected PlikTekstowy {
     Adresat adresat;
-    const string nazwaPlikuZAdresatami;
     size_t idOstatniegoAdresata;
     string nazwaTymczasowegoPlikuZAdresatami;
     string zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat);
@@ -21,8 +21,9 @@ class PlikZAdresatami {
     void usunPlik(string nazwaPlikuZRozszerzeniem);
     void zmienNazwePliku(string staraNazwa, string nowaNazwa);
 public:
-    PlikZAdresatami(string NAZWAPLIKUZADRESATAMI) : nazwaPlikuZAdresatami(NAZWAPLIKUZADRESATAMI) {
+    PlikZAdresatami(string NAZWAPLIKUZADRESATAMI) : PlikTekstowy(NAZWAPLIKUZADRESATAMI) {
     idOstatniegoAdresata = 0;
+    nazwaTymczasowegoPlikuZAdresatami = "Adresaci_temp.txt";
 };
     void dopiszAdresataDoPliku(Adresat adresat);
     vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
