@@ -13,7 +13,7 @@ string PlikZUzytkownikami :: zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionow
 void PlikZUzytkownikami :: dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik) {
     string liniaZDanymiUzytkownika = "";
     fstream plikTekstowy;
-    plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::app);
+    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::app);
 
     if (plikTekstowy.good() == true) {
         liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownik);
@@ -24,7 +24,7 @@ void PlikZUzytkownikami :: dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik) {
             plikTekstowy << liniaZDanymiUzytkownika << endl;
         }
     } else
-        cout << "Nie udalo sie otworzyc pliku " << nazwaPlikuZUzytkownikami << " i zapisac w nim danych." << endl;
+        cout << "Nie udalo sie otworzyc pliku " << pobierzNazwePliku() << " i zapisac w nim danych." << endl;
     plikTekstowy.close();
 }
 
@@ -33,7 +33,7 @@ vector <Uzytkownik> PlikZUzytkownikami :: wczytajUzytkownikowZPliku() {
     vector <Uzytkownik> uzytkownicy;
     string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
     fstream plikTekstowy;
-    plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::in);
+    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
 
     if (plikTekstowy.good() == true) {
         while (getline(plikTekstowy, daneJednegoUzytkownikaOddzielonePionowymiKreskami)) {
@@ -77,7 +77,7 @@ void PlikZUzytkownikami :: zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkowni
     fstream plikTekstowy;
     string liniaZDanymiUzytkownika = "";
 
-    plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::out);
+    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out);
 
     if (plikTekstowy.good() == true) {
         for (size_t i = 0; i < uzytkownicy.size(); i++) {
@@ -85,7 +85,7 @@ void PlikZUzytkownikami :: zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkowni
             plikTekstowy << liniaZDanymiUzytkownika << endl;
         }
     } else {
-        cout << "Nie mozna otworzyc pliku " << nazwaPlikuZUzytkownikami << endl;
+        cout << "Nie mozna otworzyc pliku " << pobierzNazwePliku() << endl;
     }
     plikTekstowy.close();
 }
