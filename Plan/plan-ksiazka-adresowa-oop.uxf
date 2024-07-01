@@ -79,15 +79,15 @@ PlikZUzytkownikami()
       <w>216</w>
       <h>315</h>
     </coordinates>
-    <panel_attributes>MetodyPomocnicze
+    <panel_attributes>AuxiliaryMethod
 --
-+konwerjsaIntNaString() : string
-+konwersjaStringNaInt() : integer
-+pobierzLiczbe() : string
-+wczytajLinie() : string
-+zamienPierwszaLitereNaDuzaAPozostaleNaMale() : string
-+wczytajZnak() : char
-+wczytajLiczbeCalkowita() : integer</panel_attributes>
++convertIntToString() : string
++convertStringToInt() : integer
++getNumber() : string
++loadLine() : string
++transformFirstUpperCaseAndRestToLowerCase() : string
++loadCharacter() : char
++loadInteger() : integer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
