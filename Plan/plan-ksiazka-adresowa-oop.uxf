@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="15.1">
-  <zoom_level>10</zoom_level>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
-      <y>0</y>
-      <w>350</w>
-      <h>510</h>
+      <x>99</x>
+      <y>45</y>
+      <w>315</w>
+      <h>459</h>
     </coordinates>
     <panel_attributes>KsiazkaAdresowa
 --
@@ -34,25 +34,25 @@ KsiazkaAdresowa()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1430</x>
-      <y>10</y>
-      <w>150</w>
-      <h>160</h>
+      <x>1350</x>
+      <y>54</y>
+      <w>135</w>
+      <h>144</h>
     </coordinates>
-    <panel_attributes>Uzytkownik
+    <panel_attributes>User
 --
-id : integer
-login : string
-haslo : string</panel_attributes>
+userId : integer
+userName : string
+password : string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>960</x>
-      <y>10</y>
-      <w>440</w>
-      <h>270</h>
+      <x>927</x>
+      <y>54</y>
+      <w>396</w>
+      <h>243</h>
     </coordinates>
     <panel_attributes>PlikZUzytkownikami
 --
@@ -74,10 +74,10 @@ PlikZUzytkownikami()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1240</x>
-      <y>610</y>
-      <w>240</w>
-      <h>350</h>
+      <x>1179</x>
+      <y>594</y>
+      <w>216</w>
+      <h>315</h>
     </coordinates>
     <panel_attributes>MetodyPomocnicze
 --
@@ -93,10 +93,10 @@ PlikZUzytkownikami()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>10</x>
-      <y>560</y>
-      <w>300</w>
-      <h>370</h>
+      <x>72</x>
+      <y>549</y>
+      <w>270</w>
+      <h>333</h>
     </coordinates>
     <panel_attributes>AdresatMenedzer
 --
@@ -125,10 +125,10 @@ AdresatMenedzer()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>560</y>
-      <w>420</w>
-      <h>360</h>
+      <x>396</x>
+      <y>549</y>
+      <w>378</w>
+      <h>324</h>
     </coordinates>
     <panel_attributes>PlikZAdresatami
 --
@@ -156,30 +156,30 @@ PlikZAdresatami()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>850</x>
-      <y>660</y>
-      <w>180</w>
-      <h>150</h>
+      <x>828</x>
+      <y>639</y>
+      <w>162</w>
+      <h>135</h>
     </coordinates>
-    <panel_attributes>Adresat
+    <panel_attributes>Recipient
 --
-id : int
-imie : string
-nazwisko : string
-numerTelefonu : string
+recipientId : int
+name : string
+surname : string
+telephone : string
 email : string
-adres : string
+address : string
 --
-Adresat()</panel_attributes>
+Recipient()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>0</y>
-      <w>470</w>
-      <h>360</h>
+      <x>468</x>
+      <y>45</y>
+      <w>423</w>
+      <h>324</h>
     </coordinates>
     <panel_attributes>UzytkownikMenedzer
 --
@@ -211,10 +211,10 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
-      <y>260</y>
-      <w>90</w>
-      <h>30</h>
+      <x>405</x>
+      <y>279</y>
+      <w>81</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
@@ -222,10 +222,10 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>910</x>
-      <y>230</y>
-      <w>70</w>
-      <h>30</h>
+      <x>882</x>
+      <y>252</y>
+      <w>63</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
@@ -233,10 +233,10 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1390</x>
-      <y>140</y>
-      <w>60</w>
-      <h>30</h>
+      <x>1314</x>
+      <y>171</y>
+      <w>54</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
@@ -244,10 +244,10 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>720</y>
-      <w>90</w>
-      <h>30</h>
+      <x>333</x>
+      <y>693</y>
+      <w>81</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
@@ -255,10 +255,10 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>500</y>
-      <w>30</w>
-      <h>80</h>
+      <x>207</x>
+      <y>495</y>
+      <w>27</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
@@ -266,10 +266,10 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>780</x>
-      <y>700</y>
-      <w>90</w>
-      <h>30</h>
+      <x>765</x>
+      <y>675</y>
+      <w>81</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
@@ -277,27 +277,27 @@ UzytkownikMenedzer()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>730</x>
-      <y>370</y>
-      <w>230</w>
-      <h>160</h>
+      <x>720</x>
+      <y>378</y>
+      <w>207</w>
+      <h>144</h>
     </coordinates>
-    <panel_attributes>PlikTekstowy
+    <panel_attributes>TextFile
 --
-NAZWA_PLIKU : const string
+FILE_NAME : const string
 --
-PlikTekstowy()
-+czyPlikJestPusty() : bool
-+pobierzNazwePliku() : string</panel_attributes>
+TextFile()
++isFileEmpty() : bool
++getFileName() : string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>940</x>
-      <y>270</y>
-      <w>120</w>
-      <h>120</h>
+      <x>909</x>
+      <y>288</y>
+      <w>108</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;:protected&gt;&gt;</panel_attributes>
@@ -306,10 +306,10 @@ PlikTekstowy()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>520</y>
-      <w>100</w>
-      <h>60</h>
+      <x>720</x>
+      <y>513</y>
+      <w>90</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;:protected&gt;&gt;</panel_attributes>

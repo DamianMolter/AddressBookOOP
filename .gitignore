@@ -39,5 +39,9 @@ KsiazkaAdresowa.cbp
 KsiazkaAdresowa.depend
 KsiazkaAdresowa.layout
 KsiazkaAdresowa.cscope_file_list
-Uzytkownicy.txt
-Adresaci.txt
+AddressBook.cbp
+AddressBook.depend
+AddressBook.layout
+AddressBook.cscope_file_list
+Users.txt
+Recipients.txt
