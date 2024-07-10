@@ -1,30 +1,30 @@
-#include "UzytkownikMenedzer.h"
+#include "UserManager.h"
 
-int UzytkownikMenedzer :: pobierzIdZalogowanegoUzytkownika() {
-    return idZalogowanegoUzytkownika;
+int UserManager :: getLoggedUserId() {
+    return loggedUserId;
 }
 
-void UzytkownikMenedzer :: rejestracjaUzytkownika() {
-    Uzytkownik uzytkownik;
-    uzytkownik = podajDaneNowegoUzytkownika();
-    uzytkownicy.push_back(uzytkownik);
-    plikZUzytkownikami.dopiszUzytkownikaDoPliku(uzytkownik);
+void UserManager :: userRegister() {
+    User user;
+    user = giveNewUserData();
+    users.push_back(user);
+    userFile.addUserToFile(user);
 
     cout << "Konto zalozono pomyslnie" << endl << endl;
     system("pause");
 }
 
-int UzytkownikMenedzer :: pobierzIdNowegoUzytkownika() {
-    if (uzytkownicy.empty() == true)
+int UserManager :: getNewUserId() {
+    if (users.empty() == true)
         return 1;
     else
-        return uzytkownicy.back().pobierzId() + 1;
+        return users.back().getId() + 1;
 }
 
-bool UzytkownikMenedzer :: czyIstniejeLogin(string login) {
+bool UserManager :: userNameExists(string userName) {
 
-    for(size_t i = 0; i < uzytkownicy.size(); i++) {
-        if (uzytkownicy[i].pobierzLogin() == login) {
+    for(size_t i = 0; i < users.size(); i++) {
+        if (users[i].setUserName() == login) {
             cout << endl << "Istnieje uzytkownik o takim loginie." << endl;
             return true;
         } else {
@@ -34,53 +34,53 @@ bool UzytkownikMenedzer :: czyIstniejeLogin(string login) {
     return false;
 }
 
-void UzytkownikMenedzer :: wyswietlWszystkichUzytkownikow() {
-    for (size_t i = 0; i < uzytkownicy.size(); i++) {
-        cout << uzytkownicy[i].pobierzId() << endl;
-        cout << uzytkownicy[i].pobierzLogin() << endl;
-        cout << uzytkownicy[i].pobierzHaslo() << endl << endl;
+void UserManager :: displayAllUsers() {
+    for (size_t i = 0; i < users.size(); i++) {
+        cout << users[i].getId() << endl;
+        cout << users[i].getUserName() << endl;
+        cout << users[i].getPassword() << endl << endl;
     }
 
 }
-Uzytkownik UzytkownikMenedzer :: podajDaneNowegoUzytkownika() {
-    string login, haslo;
-    Uzytkownik uzytkownik;
-    uzytkownik.ustawId(pobierzIdNowegoUzytkownika());
+Uzytkownik UserManager :: giveNewUserData() {
+    string userName, password;
+    User user;
+    user.setId(getNewUserId());
 
     do {
         cout << endl << "Podaj login: ";
         cin >> login;
-        uzytkownik.ustawLogin(login);
-    } while (czyIstniejeLogin(uzytkownik.pobierzLogin()) == true);
+        user.setUserName(userName);
+    } while (userNameExists(user.getUserName()) == true);
 
     cout << "Podaj haslo: ";
-    cin >> haslo;
-    uzytkownik.ustawHaslo(haslo);
+    cin >> password;
+    user.setPassword(password);
 
-    return uzytkownik;
+    return user;
 }
 
-void UzytkownikMenedzer :: wczytajUzytkownikowZPliku() {
-    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
+void UserManager :: loadUsersFromFile() {
+    users = userFile.loadUsersFromFile();
 }
 
-int UzytkownikMenedzer :: logowanieUzytkownika() {
-    string login = "", haslo = "";
+int UserManager :: userSignIn() {
+    string userName = "", password = "";
 
     cout << endl << "Podaj login: ";
-    login = MetodyPomocnicze :: wczytajLinie();
+    userName = AuxiliaryMethod:: loadLine();
 
-    for(size_t i = 0; i < uzytkownicy.size(); i++) {
-        if (uzytkownicy[i].pobierzLogin() == login) {
-            for (int iloscProb = 3; iloscProb > 0; iloscProb--) {
-                cout << "Podaj haslo. Pozostalo prob: " << iloscProb << ": ";
-                haslo = MetodyPomocnicze :: wczytajLinie();
+    for(size_t i = 0; i < users.size(); i++) {
+        if (users[i].getUserName() == userName) {
+            for (int attemptsRemained = 3; attemptsRemained > 0; attemptsRemained--) {
+                cout << "Podaj haslo. Pozostalo prob: " << attemptsRemained << ": ";
+                password = AuxiliaryMethod :: loadLine();
 
-                if (uzytkownicy[i].pobierzHaslo() == haslo) {
+                if (users[i].getPassword() == password) {
                     cout << endl << "Zalogowales sie." << endl << endl;
                     system("pause");
-                    idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
-                    return idZalogowanegoUzytkownika;
+                    loggedUserId = users[i].getId();
+                    return loggedUserId;
                 }
             }
             cout << "Wprowadzono 3 razy bledne haslo." << endl;
@@ -93,35 +93,35 @@ int UzytkownikMenedzer :: logowanieUzytkownika() {
     return 0;
 }
 
-void UzytkownikMenedzer :: zmianaHaslaZalogowanegoUzytkownika() {
-    string noweHaslo = "";
+void UserManager :: loggedUserPasswordChange() {
+    string newPassword = "";
     cout << "Podaj nowe haslo: ";
 
-    noweHaslo = MetodyPomocnicze :: wczytajLinie();
+    newPassword = MetodyPomocnicze :: wczytajLinie();
 
-    for (size_t i = 0; i < uzytkownicy.size(); i++) {
-        if (uzytkownicy[i].pobierzId() == idZalogowanegoUzytkownika) {
-            uzytkownicy[i].ustawHaslo(noweHaslo);
+    for (size_t i = 0; i < users.size(); i++) {
+        if (users[i].getId() == loggedUserId) {
+            users[i].setPassword(newPassword);
             cout << "Haslo zostalo zmienione." << endl << endl;
             system("pause");
         }
     }
-    zapiszWszystkichUzytkownikowDoPliku();
+    saveAllUsersToFile();
 }
 
-void UzytkownikMenedzer :: zapiszWszystkichUzytkownikowDoPliku() {
+void UserManager :: saveAllUsersToFile() {
 
-    plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
+    plikZUzytkownikami.saveAllUsersToFile(users);
 }
 
-bool UzytkownikMenedzer :: czyUzytkownikJestZalogowany() {
-    if(idZalogowanegoUzytkownika > 0) {
+bool UserManager :: isUserLogged() {
+    if(loggedUserId > 0) {
         return true;
     } else {
         return false;
     }
 };
 
-void UzytkownikMenedzer :: wylogowanieUzytkownika() {
-    idZalogowanegoUzytkownika = 0;
+void UserManager :: userLogout() {
+    loggedUserId = 0;
 };

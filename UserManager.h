@@ -1,36 +1,36 @@
-#ifndef UZYTKOWNIKMENEDZER_H
-#define UZYTKOWNIKMENEDZER_H
+#ifndef USERMANAGER_H
+#define USERMANAGER_H
 
 #include <iostream>
 #include <vector>
 #include <windows.h>
 #include <fstream>
 #include <sstream>
-#include "Uzytkownik.h"
-#include "PlikZUzytkownikami.h"
+#include "User.h"
+#include "UserFile.h"
 
 using namespace std;
 
-class UzytkownikMenedzer {
-    PlikZUzytkownikami plikZUzytkownikami;
-    int idZalogowanegoUzytkownika;
-    vector <Uzytkownik> uzytkownicy;
-    Uzytkownik podajDaneNowegoUzytkownika();
-    int pobierzIdNowegoUzytkownika();
-    bool czyIstniejeLogin(string login);
-    void zapiszWszystkichUzytkownikowDoPliku();
+class UserManager {
+    UserFile userFile;
+    int loggedUserId;
+    vector <User> users;
+    User giveNewUserData();
+    int getNewUserId();
+    bool userNameExists(string userName);
+    void saveAllUsersToFile();
 public:
-    UzytkownikMenedzer(string nazwaPlikuZUzytkownikami) : plikZUzytkownikami(nazwaPlikuZUzytkownikami) {
-        idZalogowanegoUzytkownika = 0;
-        wczytajUzytkownikowZPliku();
+    UserManager(string userFileName) : userFile(userFileName) {
+        loggedUserId = 0;
+        loadUsersFromFile();
     };
-    bool czyUzytkownikJestZalogowany();
-    int pobierzIdZalogowanegoUzytkownika();
-    void rejestracjaUzytkownika();
-    void wyswietlWszystkichUzytkownikow();
-    void wczytajUzytkownikowZPliku();
-    int logowanieUzytkownika();
-    void zmianaHaslaZalogowanegoUzytkownika();
-    void wylogowanieUzytkownika();
+    bool isUserLogged();
+    int getLoggedUserId();
+    void userRegister();
+    void displayAllUsers();
+    void loadUsersFromFile();
+    int userSignIn();
+    void loggedUserPasswordChange();
+    void userLogout();
 };
 #endif

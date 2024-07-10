@@ -1,93 +1,93 @@
-#include "PlikZUzytkownikami.h"
+#include "UserFile.h"
 
-string PlikZUzytkownikami :: zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik) {
-    string liniaZDanymiUzytkownika = "";
+string UserFile :: transformUserDataToSeparatedByVerticalBars(User user) {
+    string lineWithUserData = "";
 
-    liniaZDanymiUzytkownika += MetodyPomocnicze::konwerjsaIntNaString(uzytkownik.pobierzId())+ '|';
-    liniaZDanymiUzytkownika += uzytkownik.pobierzLogin() + '|';
-    liniaZDanymiUzytkownika += uzytkownik.pobierzHaslo() + '|';
+    lineWithUserData += AuxiliaryMethod::convertIntToString(user.pobierzId())+ '|';
+    lineWithUserData += user.getUserName() + '|';
+    lineWithUserData += user.getPassword() + '|';
 
-    return liniaZDanymiUzytkownika;
+    return lineWithUserData;
 }
 
-void PlikZUzytkownikami :: dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik) {
-    string liniaZDanymiUzytkownika = "";
-    fstream plikTekstowy;
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::app);
+void UserFile :: addUserToFile(User user) {
+    string lineWithUserData = "";
+    fstream textFile;
+    textFile.open(getFileName().c_str(), ios::app);
 
-    if (plikTekstowy.good() == true) {
-        liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownik);
+    if (textFile.good() == true) {
+        lineWithUserData = transformUserDataToSeparatedByVerticalBars(user);
 
-        if (MetodyPomocnicze :: czyPlikJestPusty() == true) {
-            plikTekstowy << liniaZDanymiUzytkownika;
+        if (AuxiliaryMethod :: isFileEmpty() == true) {
+            textFile << lineWithUserData;
         } else {
-            plikTekstowy << liniaZDanymiUzytkownika << endl;
+            textFile << lineWithUserData << endl;
         }
     } else
-        cout << "Nie udalo sie otworzyc pliku " << pobierzNazwePliku() << " i zapisac w nim danych." << endl;
-    plikTekstowy.close();
+        cout << "Nie udalo sie otworzyc pliku " << getFileName() << " i zapisac w nim danych." << endl;
+    textFile.close();
 }
 
-vector <Uzytkownik> PlikZUzytkownikami :: wczytajUzytkownikowZPliku() {
-    Uzytkownik uzytkownik;
-    vector <Uzytkownik> uzytkownicy;
-    string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
-    fstream plikTekstowy;
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
+vector <User> UserFile :: loadUsersFromFile() {
+    User user;
+    vector <User> users;
+    string singleUserDataSeparatedByVerticalBars = "";
+    fstream textFile;
+    textFile.open(getFileName().c_str(), ios::in);
 
-    if (plikTekstowy.good() == true) {
-        while (getline(plikTekstowy, daneJednegoUzytkownikaOddzielonePionowymiKreskami)) {
-            uzytkownik = pobierzDaneUzytkownika(daneJednegoUzytkownikaOddzielonePionowymiKreskami);
-            uzytkownicy.push_back(uzytkownik);
+    if (textFile.good() == true) {
+        while (getline(textFile, singleUserDataSeparatedByVerticalBars)) {
+            user = loadSingleUserData(singleUserDataSeparatedByVerticalBars);
+            users.push_back(user);
         }
 
     }
-    plikTekstowy.close();
-    return uzytkownicy;
+    textFile.close();
+    return users;
 }
 
-Uzytkownik PlikZUzytkownikami :: pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami) {
-    Uzytkownik uzytkownik;
-    string pojedynczaDanaUzytkownika = "";
-    int numerPojedynczejDanejUzytkownika = 1;
+User UserFile :: loadSingleUserData(string singleUserDataSeparatedByVerticalBars) {
+    User user;
+    string userSingleField = "";
+    int userSingleFieldNumber = 1;
 
-    for (size_t pozycjaZnaku = 0; pozycjaZnaku < daneJednegoUzytkownikaOddzielonePionowymiKreskami.length(); pozycjaZnaku++) {
-        if (daneJednegoUzytkownikaOddzielonePionowymiKreskami[pozycjaZnaku] != '|') {
-            pojedynczaDanaUzytkownika += daneJednegoUzytkownikaOddzielonePionowymiKreskami[pozycjaZnaku];
+    for (size_t characterPosition = 0; characterPosition < singleUserDataSeparatedByVerticalBars.length(); characterPosition++) {
+        if (singleUserDataSeparatedByVerticalBars[characterPosition] != '|') {
+            userSingleField += singleUserDataSeparatedByVerticalBars[characterPosition];
         } else {
-            switch(numerPojedynczejDanejUzytkownika) {
+            switch(userSingleFieldNumber) {
             case 1:
-                uzytkownik.ustawId(atoi(pojedynczaDanaUzytkownika.c_str()));
+                user.setUserId(atoi(userSingleField.c_str()));
                 break;
             case 2:
-                uzytkownik.ustawLogin(pojedynczaDanaUzytkownika);
+                user.setUserName(userSingleField);
                 break;
             case 3:
-                uzytkownik.ustawHaslo(pojedynczaDanaUzytkownika);
+                user.setPassword(userSingleField);
                 break;
             }
-            pojedynczaDanaUzytkownika = "";
-            numerPojedynczejDanejUzytkownika++;
+            userSingleField = "";
+            userSingleFieldNumber++;
         }
     }
-    return uzytkownik;
+    return user;
 }
 
-void PlikZUzytkownikami :: zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> uzytkownicy) {
-    fstream plikTekstowy;
-    string liniaZDanymiUzytkownika = "";
+void UserFile :: saveAllUsersToFile(vector <User> users) {
+    fstream textFile;
+    string lineWithUserData = "";
 
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out);
+    textFile.open(getFileName().c_str(), ios::out);
 
-    if (plikTekstowy.good() == true) {
-        for (size_t i = 0; i < uzytkownicy.size(); i++) {
-            liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownicy[i]);
-            plikTekstowy << liniaZDanymiUzytkownika << endl;
+    if (textFile.good() == true) {
+        for (size_t i = 0; i < users.size(); i++) {
+            lineWithUserData = transformUserDataToSeparatedByVerticalBars(users[i]);
+            textFile << lineWithUserData << endl;
         }
     } else {
-        cout << "Nie mozna otworzyc pliku " << pobierzNazwePliku() << endl;
+        cout << "Nie mozna otworzyc pliku " << getFileName() << endl;
     }
-    plikTekstowy.close();
+    textFile.close();
 }
 
 

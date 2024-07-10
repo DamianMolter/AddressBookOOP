@@ -1,25 +1,25 @@
-#ifndef PLIKZUZYTKOWNIKAMI_H
-#define PLIKZUZYTKOWNIKAMI_H
+#ifndef USERFILE_H
+#define USERFILE_H
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <cstdlib>
-#include "Uzytkownik.h"
-#include "MetodyPomocnicze.h"
-#include "PlikTekstowy.h"
+#include "User.h"
+#include "AuxiliaryMethod.h"
+#include "TextFile.h"
 
 using namespace std;
 
-class PlikZUzytkownikami : protected PlikTekstowy{
+class UserFile : protected TextFile{
 
-    string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
-    string daneJednegoUzytkownikaOddzielonePionowymiKreskami;
-    Uzytkownik pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
+    string singleUserDataSeparatedByVerticalBars;
+    string transformUserDataToSeparatedByVerticalBars(User user);
+    User loadSingleUserData(string singleUserDataSeparatedByVerticalBars);
 public:
-    PlikZUzytkownikami(string NAZWAPLIKUZUZYTKOWNIKAMI) : PlikTekstowy(NAZWAPLIKUZUZYTKOWNIKAMI){};
-    vector <Uzytkownik> wczytajUzytkownikowZPliku();
-    void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
-    void zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> uzytkownicy);
+    UserFile(string userFileName) : TextFile(USERFILENAME){};
+    vector <User> loadUsersFromFile();
+    void addUserToFile(User user);
+    void saveAllUsersToFile(vector <User> users);
 
 };
 #endif

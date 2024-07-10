@@ -1,39 +1,39 @@
-#ifndef KSIAZKAADRESOWA_H
-#define KSIAZKAADRESOWA_H
+#ifndef ADDRESSBOOK_H
+#define ADDRESSBOOK_H
 #include <iostream>
-#include "UzytkownikMenedzer.h"
-#include "AdresatMenedzer.h"
+#include "UserManager.h"
+#include "RecipientManager.h"
 
 
 using namespace std;
 
-class KsiazkaAdresowa {
-    UzytkownikMenedzer uzytkownikMenedzer;
-    AdresatMenedzer *adresatMenedzer;
-    const string NAZWA_PLIKU_Z_ADRESATAMI;
+class AddressBook {
+    UserManager userManager;
+    RecipientManager *recipientManager;
+    const string RECIPIENT_FILE_NAME;
 public:
-    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami, string nazwaPlikuZAdresatami)
-    :uzytkownikMenedzer(nazwaPlikuZUzytkownikami), NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami) {
-        adresatMenedzer = NULL;
+    AddressBook(string userFileName, string recipientFileName)
+    :uzytkownikMenedzer(userFileName), RECIPIENT_FILE_NAME(recipientFileName) {
+        recipientManager = NULL;
     };
-    ~KsiazkaAdresowa() {
-        delete adresatMenedzer;
-        adresatMenedzer = NULL;
+    ~AddressBook() {
+        delete recipientManager;
+        recipientManager = NULL;
     }
-    void rejestracjaUzytkownika();
-    void wyswietlWszystkichUzytkownikow();
-    void logowanieUzytkownika();
-    void zmianaHaslaZalogowanegoUzytkownika();
-    void dodajAdresata();
-    void wyswietlWszystkichAdresatow();
-    void wylogowanieUzytkownika();
-    bool czyUzytkownikJestZalogowany();
-    char wybierzOpcjeZMenuGlownego();
-    char wybierzOpcjeZMenuUzytkownika();
-    void wyszukajAdresatowPoImieniu();
-    void wyszukajAdresatowPoNazwisku();
-    void usunAdresata();
-    void edytujAdresata();
+    void userRegister();
+    void displayAllUsers();
+    void userSignin();
+    void loggedUserPasswordChange();
+    void addRecipient();
+    void displayAllRecipients();
+    void userLogout();
+    bool isUserLogged();
+    char pickOptionMainMenu();
+    char pickOptionUserMenu();
+    void findRecipientByName();
+    void findRecipientBySurname();
+    void deleteRecipient();
+    void editRecipient();
 };
 
 #endif

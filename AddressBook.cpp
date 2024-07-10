@@ -1,64 +1,64 @@
-#include "KsiazkaAdresowa.h"
+#include "AddressBook.h"
 
 
-void KsiazkaAdresowa::rejestracjaUzytkownika() {
+void AddressBook::userRegister() {
 
-    uzytkownikMenedzer.rejestracjaUzytkownika();
+    userManager.userRegister();
 
 }
 
-bool KsiazkaAdresowa :: czyUzytkownikJestZalogowany() {
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
+bool AddressBook :: isUserLogged() {
+    if(userManager.isUserLogged()) {
         return true;
     } else {
         return false;
     }
 }
 
-void KsiazkaAdresowa :: logowanieUzytkownika() {
+void AddressBook :: userSignIn() {
 
-    uzytkownikMenedzer.logowanieUzytkownika();
+    userManager.userSignIn();
 
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
-        adresatMenedzer = new AdresatMenedzer(uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika(), NAZWA_PLIKU_Z_ADRESATAMI);
+    if(userManager.isUserLogged()) {
+        recipientManager = new RecipientManager(userManager.getLoggedUserId(), RECIPIENT_FILE_NAME);
     }
 
 }
 
-void KsiazkaAdresowa :: wyswietlWszystkichUzytkownikow() {
+void AddressBook :: displayAllUsers() {
 
-    uzytkownikMenedzer.wyswietlWszystkichUzytkownikow();
+    userManager.displayAllUsers();
 }
 
-void KsiazkaAdresowa :: zmianaHaslaZalogowanegoUzytkownika() {
+void AddressBook :: loggedUserPasswordChange() {
 
-    uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika();
+    userManager.loggedUserPasswordChange();
 
 }
 
-void KsiazkaAdresowa :: dodajAdresata() {
+void AddressBook :: addRecipient() {
 
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
-        adresatMenedzer->dodajAdresata();
+    if(userManager.isUserLogged()) {
+        recipientManager->addRecipient();
     }
 }
 
-void KsiazkaAdresowa :: wyswietlWszystkichAdresatow() {
+void AddressBook :: displayAllRecipients() {
 
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
-        adresatMenedzer->wyswietlWszystkichAdresatow();
+    if(userManager.isUserLogged()) {
+        recipientManager->displayAllRecipients();
     }
 }
 
-void KsiazkaAdresowa :: wylogowanieUzytkownika() {
-    uzytkownikMenedzer.wylogowanieUzytkownika();
-    delete adresatMenedzer;
-    adresatMenedzer = NULL;
+void AddressBook :: userLogout() {
+    userManager.userLogout();
+    delete recipientManager;
+    recipientManager = NULL;
     cout << "Pomyslnie wylogowao." << endl;
 }
 
-char KsiazkaAdresowa :: wybierzOpcjeZMenuGlownego() {
-    char wybor;
+char AddressBook :: pickOptionMainMenu() {
+    char choice;
 
     system("cls");
     cout << "    >>> MENU  GLOWNE <<<" << endl;
@@ -67,14 +67,14 @@ char KsiazkaAdresowa :: wybierzOpcjeZMenuGlownego() {
     cout << "2. Logowanie" << endl;
     cout << "9. Koniec programu" << endl;
     cout << "---------------------------" << endl;
-    cout << "Twoj wybor: ";
-    wybor = MetodyPomocnicze :: wczytajZnak();
+    cout << "Twoj choice: ";
+    choice = AuxiliaryMethod :: wczytajZnak();
 
-    return wybor;
+    return choice;
 }
 
-char KsiazkaAdresowa :: wybierzOpcjeZMenuUzytkownika() {
-    char wybor;
+char AddressBook :: wybierzOpcjeZMenuUzytkownika() {
+    char choice;
 
     system("cls");
     cout << " >>> MENU UZYTKOWNIKA <<<" << endl;
@@ -89,28 +89,28 @@ char KsiazkaAdresowa :: wybierzOpcjeZMenuUzytkownika() {
     cout << "7. Zmien haslo" << endl;
     cout << "8. Wyloguj sie" << endl;
     cout << "---------------------------" << endl;
-    cout << "Twoj wybor: ";
-    wybor = MetodyPomocnicze :: wczytajZnak();
+    cout << "Twoj choice: ";
+    choice = AuxiliaryMethod :: loadCharecter();
 
-    return wybor;
+    return choice;
 }
 
-void KsiazkaAdresowa :: wyszukajAdresatowPoImieniu() {
+void AddressBook :: findRecipientByName() {
 
-    adresatMenedzer->wyszukajAdresatowPoImieniu();
-
-}
-
-void KsiazkaAdresowa :: wyszukajAdresatowPoNazwisku() {
-
-    adresatMenedzer->wyszukajAdresatowPoNazwisku();
+    recipientManager->findRecipientByName();
 
 }
 
-void KsiazkaAdresowa :: usunAdresata() {
-    adresatMenedzer->usunAdresata();
+void AddressBook :: findRecipientBySurname() {
+
+    recipientManager->findRecipientBySurname();
+
 }
 
-void KsiazkaAdresowa :: edytujAdresata() {
-    adresatMenedzer->edytujAdresata();
+void AddressBook :: deleteRecipient() {
+    recipientManager->deleteRecipient();
+}
+
+void AddressBook :: editRecipient() {
+    recipientManager->editRecipient();
 }

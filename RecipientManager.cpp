@@ -1,56 +1,56 @@
-#include "AdresatMenedzer.h"
+#include "RecipientManager.h"
 
 
-int AdresatMenedzer :: dodajAdresata() {
+int RecipientManager :: addRecipient() {
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-    Adresat adresat;
-    adresat = podajDaneNowegoAdresata(ID_ZALOGOWANEGO_UZYTKOWNIKA);
-    adresaci.push_back(adresat);
-    plikZAdresatami.dopiszAdresataDoPliku(adresat);
+    Recipient recipient;
+    recipient = giveNewRecipientData(LOGGED_RECIPIENT_ID);
+    recipients.push_back(recipient);
+    recipientFile.addRecipientToFile(recipient);
 
-    return idOstatniegoAdresata + 1;
+    return lastRecipientId + 1;
 }
 
-Adresat AdresatMenedzer :: podajDaneNowegoAdresata(int idZalogowanegoUzytkownika) {
-    Adresat adresat;
-    string imie, nazwisko, numerTelefonu, email, adres;
-    adresat.ustawId(plikZAdresatami.pobierzIdNowegoAdresata());
-    adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
+Recipient RecipientManager :: giveNewRecipientData(int loggedRecipientId) {
+    Recipient recipient;
+    string name, surname, telephone, email, address;
+    recipient.setId(recipientFile.getNewRecipientId());
+    recipient.setUserId(loggedRecipientId);
 
     cout << "Podaj imie: ";
-    imie = MetodyPomocnicze :: wczytajLinie();
-    imie = MetodyPomocnicze :: zamienPierwszaLitereNaDuzaAPozostaleNaMale(imie);
+    name = AuxiliaryMethod :: loadLine();
+    name = AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(imie);
 
     cout << "Podaj nazwisko: ";
-    nazwisko = MetodyPomocnicze :: wczytajLinie();
-    nazwisko = MetodyPomocnicze :: zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwisko);
+    surname = AuxiliaryMethod :: loadLine();
+    surname = AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(nazwisko);
 
     cout << "Podaj numer telefonu: ";
-    numerTelefonu = MetodyPomocnicze :: wczytajLinie();
+    telephone = AuxiliaryMethod :: loadLine();
 
     cout << "Podaj email: ";
-    email = MetodyPomocnicze :: wczytajLinie();
+    email = AuxiliaryMethod :: loadLine();
 
     cout << "Podaj adres: ";
-    adres = MetodyPomocnicze :: wczytajLinie();
+    adres = AuxiliaryMethod :: loadLine();
 
-    adresat.ustawImie(imie);
-    adresat.ustawNazwisko(nazwisko);
-    adresat.ustawNumerTelefonu(numerTelefonu);
-    adresat.ustawEmail(email);
-    adresat.ustawAdres(adres);
+    recipient.setName(name);
+    recipient.setSurname(surname);
+    recipient.setTelephone(telephone);
+    recipient.setEmail(email);
+    recipient.setAddress(address);
 
-    return adresat;
+    return recipient;
 }
 
-void AdresatMenedzer :: wyswietlWszystkichAdresatow() {
+void RecipientManager :: displayAllRecipients() {
     system("cls");
-    if (!adresaci.empty()) {
+    if (!recipients.empty()) {
         cout << "             >>> ADRESACI <<<" << endl;
         cout << "-----------------------------------------------" << endl;
-        for (size_t i = 0; i < adresaci.size(); i++) {
-            wyswietlDaneAdresata(i);
+            displayRecipientData(i);
+        for (size_t i = 0; i < recipients.size(); i++) {
         }
         cout << endl;
     } else {
@@ -59,36 +59,36 @@ void AdresatMenedzer :: wyswietlWszystkichAdresatow() {
     system("pause");
 }
 
-void AdresatMenedzer :: wyswietlDaneAdresata(size_t index) {
-    cout << endl << "Id:         " << adresaci[index].pobierzId() << endl;
-    cout << endl << "Id uzytkownika:" << adresaci[index].pobierzIdUzytkownika() << endl;
-    cout << "Imie:               " << adresaci[index].pobierzImie() << endl;
-    cout << "Nazwisko:           " << adresaci[index].pobierzNazwisko() << endl;
-    cout << "Numer telefonu:     " << adresaci[index].pobierzNumerTelefonu() << endl;
-    cout << "Email:              " << adresaci[index].pobierzEmail() << endl;
-    cout << "Adres:              " << adresaci[index].pobierzAdres() << endl << endl;
+void RecipientManager :: displayRecipientData(size_t index) {
+    cout << endl << "Id:         " << recipients[index].loadId() << endl;
+    cout << endl << "Id uzytkownika:" << recipients[index].loadUserId() << endl;
+    cout << "Imie:               " << recipients[index].getName() << endl;
+    cout << "Nazwisko:           " << recipients[index].getSurname() << endl;
+    cout << "Numer telefonu:     " << recipients[index].getTelephone() << endl;
+    cout << "Email:              " << recipients[index].getEmail() << endl;
+    cout << "Adres:              " << recipients[index].getAddress() << endl << endl;
 }
 
-void AdresatMenedzer :: wyszukajAdresatowPoImieniu() {
+void RecipientManager :: findRecipientByName() {
 
-    string imiePoszukiwanegoAdresata = "";
-    int iloscAdresatow = 0;
+    string wantedRecipientName = "";
+    int recipientsAmount = 0;
 
     system("cls");
-    if (!adresaci.empty()) {
+    if (!recipients.empty()) {
         cout << ">>> WYSZUKIWANIE ADRESATOW O IMIENIU <<<" << endl << endl;
 
         cout << "Wyszukaj adresatow o imieniu: ";
-        imiePoszukiwanegoAdresata = MetodyPomocnicze :: wczytajLinie();
-        imiePoszukiwanegoAdresata = MetodyPomocnicze :: zamienPierwszaLitereNaDuzaAPozostaleNaMale(imiePoszukiwanegoAdresata);
+        wantedRecipientName = AuxiliaryMethod :: loadLine();
+        wantedRecipientName = AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(wantedRecipientName);
 
-        for (size_t i = 0; i < adresaci.size(); i++) {
-            if (adresaci[i].pobierzImie() == imiePoszukiwanegoAdresata) {
-                wyswietlDaneAdresata(i);
-                iloscAdresatow++;
+        for (size_t i = 0; i < recipients.size(); i++) {
+            if (recipients[i].getName() == wantedRecipientName) {
+                displayRecipientData(i);
+                recipientsAmount++;
             }
         }
-        wyswietlIloscWyszukanychAdresatow(iloscAdresatow);
+        displayFoundRecipientsAmount(recipientsAmount);
     } else {
         cout << endl << "Ksiazka adresowa jest pusta" << endl << endl;
     }
@@ -96,26 +96,26 @@ void AdresatMenedzer :: wyszukajAdresatowPoImieniu() {
     system("pause");
 }
 
-void AdresatMenedzer :: wyszukajAdresatowPoNazwisku() {
+void RecipientManager :: findRecipientBySurname() {
 
-    string nazwiskoPoszukiwanegoAdresata = "";
-    int iloscAdresatow = 0;
+    string wantedRecipientSurname = "";
+    int recipientsAmount = 0;
 
     system("cls");
-    if (!adresaci.empty()) {
+    if (!recipients.empty()) {
         cout << ">>> WYSZUKIWANIE ADRESATOW O IMIENIU <<<" << endl << endl;
 
         cout << "Wyszukaj adresatow o imieniu: ";
-        nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze :: wczytajLinie();
-        nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze :: zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwiskoPoszukiwanegoAdresata);
+        wantedRecipientSurname = AuxiliaryMethod :: loadLine();
+        wantedRecipientSurname = AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(wantedRecipientSurname);
 
-        for (size_t i = 0; i < adresaci.size(); i++) {
-            if (adresaci[i].pobierzNazwisko() == nazwiskoPoszukiwanegoAdresata) {
-                wyswietlDaneAdresata(i);
-                iloscAdresatow++;
+        for (size_t i = 0; i < recipients.size(); i++) {
+            if (recipients[i].getSurname() == wantedRecipientSurname) {
+                displayRecipientData(i);
+                recipientsAmount++;
             }
         }
-        wyswietlIloscWyszukanychAdresatow(iloscAdresatow);
+        displayFoundRecipientsAmount(recipientsAmount);
     } else {
         cout << endl << "Ksiazka adresowa jest pusta" << endl << endl;
     }
@@ -123,97 +123,97 @@ void AdresatMenedzer :: wyszukajAdresatowPoNazwisku() {
     system("pause");
 }
 
-void AdresatMenedzer :: wyswietlIloscWyszukanychAdresatow(int iloscAdresatow) {
-    if (iloscAdresatow == 0)
+void RecipientManager :: displayFoundRecipientsAmount(int recipientsAmount) {
+    if (recipientsAmount == 0)
         cout << endl << "W ksiazce adresowej nie ma adresatow z tymi danymi." << endl;
     else
-        cout << endl << "Ilosc poszukiwanych adresatow w ksiazce adresowej wynosi: " << iloscAdresatow << endl << endl;
+        cout << endl << "Ilosc poszukiwanych adresatow w ksiazce adresowej wynosi: " << recipientsAmount << endl << endl;
 }
 
-int AdresatMenedzer :: podajIdWybranegoAdresata() {
-    int idWybranegoAdresata = 0;
+int RecipientManager :: giveChosenRecipientId() {
+    int chosenRecipientId = 0;
     cout << "Podaj numer ID Adresata: ";
-    idWybranegoAdresata  = MetodyPomocnicze :: wczytajLiczbeCalkowita();
-    return idWybranegoAdresata;
+    chosenRecipientId  = AuxiliaryMethod :: loadInteger();
+    return chosenRecipientId;
 };
 
-void AdresatMenedzer :: usunAdresata() {
+void RecipientManager :: deleteRecipient() {
 
-    int idUsuwanegoAdresata = 0;
+    int deletedRecipientId = 0;
 
     system("cls");
     cout << ">>> USUWANIE WYBRANEGO ADRESATA <<<" << endl << endl;
-    idUsuwanegoAdresata = podajIdWybranegoAdresata();
+    deletedRecipientId = giveChosenRecipientId();
 
-    char znak;
-    bool czyIstniejeAdresat = false;
+    char character;
+    bool doesRecipientExist = false;
 
-    for (size_t i = 0; i < adresaci.size(); i++) {
-        if (adresaci[i].pobierzId() == idUsuwanegoAdresata) {
-            czyIstniejeAdresat = true;
+    for (size_t i = 0; i < recipients.size(); i++) {
+        if (recipients[i].loadRecipientId() == deletedRecipientId) {
+            doesRecipientExist = true;
             cout << endl << "Potwierdz naciskajac klawisz 't': ";
-            znak = MetodyPomocnicze :: wczytajZnak();
-            if (znak == 't') {
-                plikZAdresatami.usunWybranaLinieWPliku(idUsuwanegoAdresata);
-                adresaci.erase(adresaci.begin() + i);
-                cout << endl << endl << "Szukany adresat zostal USUNIETY" << endl << endl;
+            character = AuxiliaryMethod :: loadCharacter();
+            if (character == 't') {
+                recipientFile.deleteChosenLineFromFile(deletedRecipientId);
+                recipients.erase(recipients.begin() + i);
+                cout << endl << endl << "Szukany recipient zostal USUNIETY" << endl << endl;
                 system("pause");
             } else {
-                cout << endl << endl << "Wybrany adresat NIE zostal usuniety" << endl << endl;
+                cout << endl << endl << "Wybrany recipient NIE zostal usuniety" << endl << endl;
                 system("pause");
             }
         }
     }
-    if (czyIstniejeAdresat == false) {
+    if (doesRecipientExist == false) {
         cout << endl << "Nie ma takiego adresata w ksiazce adresowej" << endl << endl;
         system("pause");
     }
 }
 
-void AdresatMenedzer :: edytujAdresata() {
+void RecipientManager :: editRecipient() {
     system("cls");
-    Adresat adresat;
-    int idEdytowanegoAdresata = 0;
+    Recipient recipient;
+    int editedRecipientId = 0;
     string liniaZDanymiAdresata = "";
 
     cout << ">>> EDYCJA WYBRANEGO ADRESATA <<<" << endl << endl;
-    idEdytowanegoAdresata = podajIdWybranegoAdresata();
+    editedRecipientId = giveChosenRecipientId();
 
-    char wybor;
-    bool czyIstniejeAdresat = false;
+    char choice;
+    bool doesRecipientExist = false;
 
-    for (size_t i = 0; i < adresaci.size(); i++) {
-        if (adresaci[i].pobierzId() == idEdytowanegoAdresata) {
-            czyIstniejeAdresat = true;
-            wybor = wybierzOpcjeZMenuEdycja();
+    for (size_t i = 0; i < recipients.size(); i++) {
+        if (recipients[i].loadRecipientId() == editedRecipientId) {
+            doesRecipientExist = true;
+            choice = chooseRecipientEditMenuOption();
 
-            switch (wybor) {
+            switch (choice) {
             case '1':
                 cout << "Podaj nowe imie: ";
-                adresaci[i].ustawImie(MetodyPomocnicze :: wczytajLinie());
-                adresaci[i].ustawImie(MetodyPomocnicze :: zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresaci[i].pobierzImie()));
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresaci[i], idEdytowanegoAdresata);
+                recipients[i].setName(AuxiliaryMethod :: loadLine());
+                recipients[i].setName(AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(recipients[i].pobierzImie()));
+                recipientFile.updateChosenRecipientData(recipients[i], editedRecipientId);
                 break;
             case '2':
                 cout << "Podaj nowe nazwisko: ";
-                adresaci[i].ustawNazwisko(MetodyPomocnicze :: wczytajLinie());
-                adresaci[i].ustawNazwisko(MetodyPomocnicze :: zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresaci[i].pobierzNazwisko()));
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresaci[i], idEdytowanegoAdresata);
+                recipients[i].setSurname(AuxiliaryMethod :: loadLine());
+                recipients[i].setSurname(AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(recipients[i].pobierzNazwisko()));
+                recipientFile.updateChosenRecipientData(recipients[i], editedRecipientId);
                 break;
             case '3':
                 cout << "Podaj nowy numer telefonu: ";
-                adresaci[i].ustawNumerTelefonu(MetodyPomocnicze :: wczytajLinie());
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresaci[i], idEdytowanegoAdresata);
+                recipients[i].setTelephone(AuxiliaryMethod :: loadLine());
+                recipientFile.updateChosenRecipientData(recipients[i], editedRecipientId);
                 break;
             case '4':
                 cout << "Podaj nowy email: ";
-                adresaci[i].ustawEmail(MetodyPomocnicze :: wczytajLinie());
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresaci[i], idEdytowanegoAdresata);
+                recipients[i].setEmail(AuxiliaryMethod :: loadLine());
+                recipientFile.updateChosenRecipientData(recipients[i], editedRecipientId);
                 break;
             case '5':
                 cout << "Podaj nowy adres zamieszkania: ";
-                adresaci[i].ustawAdres(MetodyPomocnicze :: wczytajLinie());
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresaci[i], idEdytowanegoAdresata);
+                recipients[i].setAddress(AuxiliaryMethod :: loadLine());
+                recipientFile.updateChosenRecipientData(recipients[i], editedRecipientId);
                 break;
             case '6':
                 cout << endl << "Powrot do menu uzytkownika" << endl << endl;
@@ -224,14 +224,14 @@ void AdresatMenedzer :: edytujAdresata() {
             }
         }
     }
-    if (czyIstniejeAdresat == false) {
+    if (doesRecipientExist == false) {
         cout << endl << "Nie ma takiego adresata." << endl << endl;
     }
     system("pause");
 }
 
-char AdresatMenedzer :: wybierzOpcjeZMenuEdycja() {
-    char wybor;
+char RecipientManager :: chooseRecipientEditMenuOption() {
+    char choice;
 
     cout << endl << "   >>> MENU  EDYCJA <<<" << endl;
     cout << "---------------------------" << endl;
@@ -242,8 +242,8 @@ char AdresatMenedzer :: wybierzOpcjeZMenuEdycja() {
     cout << "4 - Email" << endl;
     cout << "5 - Adres" << endl;
     cout << "6 - Powrot " << endl;
-    cout << endl << "Twoj wybor: ";
-    wybor = MetodyPomocnicze :: wczytajZnak();
+    cout << endl << "Twoj choice: ";
+    choice = AuxiliaryMethod :: loadCharacter();
 
-    return wybor;
+    return choice;
 }

@@ -1,187 +1,187 @@
-#include "PlikZAdresatami.h"
+#include "RecipientFile.h"
 
 int PlikZAdresatami :: pobierzIdNowegoAdresata() {
-    fstream plikZAdresatami;
-    plikZAdresatami.open(pobierzNazwePliku().c_str(), ios::in);
-    int idOstatniegoAdresata = 0;
-    string linia = "";
-    while(getline(plikZAdresatami, linia)) {
-        size_t pozycjaPierwszejPionowejKreski = linia.find('|');
-        idOstatniegoAdresata = stoi(linia.substr(0, pozycjaPierwszejPionowejKreski));
+    fstream recipientFile;
+    recipientFile.open(getFileName().c_str(), ios::in);
+    int lastRecipientId = 0;
+    string line = "";
+    while(getline(recipientFile, line)) {
+        size_t firstVerticalBarPosition = line.find('|');
+        lastRecipientId = stoi(line.substr(0, firstVerticalBarPosition));
     }
-    plikZAdresatami.close();
-    return idOstatniegoAdresata + 1;
+    recipientFile.close();
+    return lastRecipientId + 1;
 }
 
-void PlikZAdresatami :: dopiszAdresataDoPliku(Adresat adresat) {
-    string liniaZDanymiAdresata = "";
-    fstream plikTekstowy;
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::app);
+void RecipientFile :: addRecipientToFile(Recipient recipient) {
+    string lineWithRecipientData = "";
+    fstream textFile;
+    plikTekstowy.open(getFileName().c_str(), ios::app);
 
-    if (plikTekstowy.good() == true) {
-        liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
-        plikTekstowy << liniaZDanymiAdresata << endl;
+    if (textFile.good() == true) {
+        lineWithRecipientData = transformRecipientDataToSeparatedByVerticalBars(recipient);
+        textFile << lineWithRecipientData << endl;
     } else {
         cout << "Nie udalo sie otworzyc pliku i zapisac w nim danych." << endl;
     }
-    plikTekstowy.close();
+    textFile.close();
     system("pause");
 }
 
-string PlikZAdresatami :: zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat) {
-    string liniaZDanymiAdresata = "";
+string RecipientFile :: transformRecipientDataToSeparatedByVerticalBars(Recipient recipient) {
+    string lineWithRecipientData = "";
 
-    liniaZDanymiAdresata += MetodyPomocnicze :: konwerjsaIntNaString(adresat.pobierzId()) + '|';
-    liniaZDanymiAdresata += MetodyPomocnicze :: konwerjsaIntNaString(adresat.pobierzIdUzytkownika()) + '|';
-    liniaZDanymiAdresata += adresat.pobierzImie() + '|';
-    liniaZDanymiAdresata += adresat.pobierzNazwisko() + '|';
-    liniaZDanymiAdresata += adresat.pobierzNumerTelefonu() + '|';
-    liniaZDanymiAdresata += adresat.pobierzEmail() + '|';
-    liniaZDanymiAdresata += adresat.pobierzAdres() + '|';
+    lineWithRecipientData += AuxiliaryMethod :: convertIntToString(recipient.pobierzId()) + '|';
+    lineWithRecipientData += AuxiliaryMethod :: convertStringToInt(recipient.pobierzIdUzytkownika()) + '|';
+    lineWithRecipientData += recipient.getName() + '|';
+    lineWithRecipientData += recipient.getSurname() + '|';
+    lineWithRecipientData += recipient.getTelephone() + '|';
+    lineWithRecipientData += recipient.getEmail() + '|';
+    lineWithRecipientData += recipient.getAddress() + '|';
 
-    return liniaZDanymiAdresata;
+    return lineWithRecipientData;
 }
 
-vector <Adresat> PlikZAdresatami :: wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika) {
-    Adresat adresat;
-    vector <Adresat> adresaci;
-    string daneJednegoAdresataOddzielonePionowymiKreskami = "abc";
-    string daneOstatniegoAdresataWPliku = "";
-    fstream plikTekstowy;
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
+vector <Recipient> RecipientFile :: loadLoggedUserRecipientsFromFile(int loggedUserId) {
+    Recipient recipient;
+    vector <Recipient> recipients;
+    string singleRecipientDataSeparatedByVerticalBars = "";
+    string lastRecipientDataInFile = "";
+    fstream textFile;
+    textFile.open(getFileName().c_str(), ios::in);
 
-    if (plikTekstowy.good() == true) {
-        while (getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami)) {
-            if(idZalogowanegoUzytkownika == pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami)) {
-                adresat = pobierzDaneAdresata(daneJednegoAdresataOddzielonePionowymiKreskami);
-                adresaci.push_back(adresat);
+    if (textFile.good() == true) {
+        while (getline(textFile, singleRecipientDataSeparatedByVerticalBars)) {
+            if(loggedUserId == getRecipientIdFromDataSeparatedByVerticakBars(singleRecipientDataSeparatedByVerticalBars)) {
+                recipient = getRecipientData(singleRecipientDataSeparatedByVerticalBars);
+                recipients.push_back(recipient);
             }
         }
-        daneOstatniegoAdresataWPliku = daneJednegoAdresataOddzielonePionowymiKreskami;
+        lastRecipientDataInFile = singleRecipientDataSeparatedByVerticalBars;
     } else
         cout << "Nie udalo sie otworzyc pliku i wczytac danych." << endl;
 
-    plikTekstowy.close();
+    textFile.close();
 
-    return adresaci;
+    return recipients;
 }
 
-Adresat PlikZAdresatami :: pobierzDaneAdresata(string daneAdresataOddzielonePionowymiKreskami) {
-    string pojedynczaDanaAdresata = "";
-    int numerPojedynczejDanejAdresata = 1;
+Recipient RecipientFile :: getRecipientData(string recipientDataSeparatedByVerticalBars) {
+    string singleRecipientField = "";
+    int singleRecipientFieldNumber = 1;
 
-    for (size_t pozycjaZnaku = 0; pozycjaZnaku < daneAdresataOddzielonePionowymiKreskami.length(); pozycjaZnaku++) {
-        if (daneAdresataOddzielonePionowymiKreskami[pozycjaZnaku] != '|') {
-            pojedynczaDanaAdresata += daneAdresataOddzielonePionowymiKreskami[pozycjaZnaku];
+    for (size_t pozycjaZnaku = 0; pozycjaZnaku < recipientDataSeparatedByVerticalBars.length(); pozycjaZnaku++) {
+        if (recipientDataSeparatedByVerticalBars[pozycjaZnaku] != '|') {
+            singleRecipientField += recipientDataSeparatedByVerticalBars[pozycjaZnaku];
         } else {
-            switch(numerPojedynczejDanejAdresata) {
+            switch(singleRecipientFieldNumber) {
             case 1:
-                adresat.ustawId(atoi(pojedynczaDanaAdresata.c_str()));
+                recipient.setRecipientId(atoi(singleRecipientField.c_str()));
                 break;
             case 2:
-                adresat.ustawIdUzytkownika(atoi(pojedynczaDanaAdresata.c_str()));
+                recipient.setUserId(atoi(singleRecipientField.c_str()));
                 break;
             case 3:
-                adresat.ustawImie(pojedynczaDanaAdresata);
+                recipient.setName(singleRecipientField);
                 break;
             case 4:
-                adresat.ustawNazwisko(pojedynczaDanaAdresata);
+                recipient.setSurname(singleRecipientField);
                 break;
             case 5:
-                adresat.ustawNumerTelefonu(pojedynczaDanaAdresata);
+                recipient.setTelephone(singleRecipientField);
                 break;
             case 6:
-                adresat.ustawNumerTelefonu(pojedynczaDanaAdresata);
+                recipient.setEmail(singleRecipientField);
                 break;
             case 7:
-                adresat.ustawEmail(pojedynczaDanaAdresata);
+                recipient.setAddress(singleRecipientField);
                 break;
             }
-            pojedynczaDanaAdresata = "";
-            numerPojedynczejDanejAdresata++;
+            singleRecipientField = "";
+            singleRecipientFieldNumber++;
         }
     }
-    return adresat;
+    return recipient;
 }
 
 
-int PlikZAdresatami :: pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami) {
-    int pozycjaRozpoczeciaIdUzytkownika = daneJednegoAdresataOddzielonePionowymiKreskami.find_first_of('|') + 1;
-    int idUzytkownika = MetodyPomocnicze :: konwersjaStringNaInt(MetodyPomocnicze :: pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdUzytkownika));
+int RecipientFile :: getUserIdFromDataSeparatedByVerticakBars(string recipientDataSeparatedByVerticalBars) {
+    int userBeginPosition = singleRecipientDataSeparatedByVerticalBars.find_first_of('|') + 1;
+    int userId = AuxiliaryMethod :: convertStringToInt(AuxiliaryMethod :: pobierzLiczbe(singleRecipientDataSeparatedByVerticalBars, pozycjaRozpoczeciaIdUzytkownika));
 
-    return idUzytkownika;
+    return userId;
 }
 
-int PlikZAdresatami :: pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami) {
-    int pozycjaRozpoczeciaIdAdresata = 0;
-    int idAdresata = MetodyPomocnicze :: konwersjaStringNaInt(MetodyPomocnicze :: pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdAdresata));
-    return idAdresata;
+int RecipientFile :: getRecipientIdFromDataSeparatedByVerticakBars(string recipientDataSeparatedByVerticalBars) {
+    int recipientIdBeginPosition = 0;
+    int recipientId = AuxiliaryMethod :: convertStringToInt(AuxiliaryMethod :: getNumber(singleRecipientDataSeparatedByVerticalBars, recipientIdBeginPosition));
+    return recipientId;
 }
 
-void PlikZAdresatami :: usunWybranaLinieWPliku(int idUsuwanegoAdresata) {
-    fstream odczytywanyPlikTekstowy, tymczasowyPlikTekstowy;
-    string wczytanaLinia = "";
+void RecipientFile :: deleteChosenLineFromFile(int deletedRecipientId) {
+    fstream textFile, temporaryTextFile;
+    string loadedLine = "";
 
-    odczytywanyPlikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
-    tymczasowyPlikTekstowy.open(nazwaTymczasowegoPlikuZAdresatami.c_str(), ios::out | ios::app);
+    odczytywanyPlikTekstowy.open(getFileName().c_str(), ios::in);
+    temporaryTextFile.open(temporaryRecipientFileName.c_str(), ios::out | ios::app);
 
-    if (odczytywanyPlikTekstowy.good() == true && idUsuwanegoAdresata != 0) {
-        while (getline(odczytywanyPlikTekstowy, wczytanaLinia)) {
-            size_t pozycjaPierwszejPionowejKreski = wczytanaLinia.find('|');
-            int numerIdZOdczytanegoPlikuTekstowego = stoi(wczytanaLinia.substr(0, pozycjaPierwszejPionowejKreski));
-            if(numerIdZOdczytanegoPlikuTekstowego != idUsuwanegoAdresata) {
-                tymczasowyPlikTekstowy << wczytanaLinia << endl;
+    if (textFile.good() == true && deletedRecipientId != 0) {
+        while (getline(textFile, loadedLine)) {
+            size_t firstVerticalBarPosition = loadedLine.find('|');
+            int recipientIdLoadedFromTextFile = stoi(loadedLine.substr(0, pozycjaPierwszejPionowejKreski));
+            if(recipientIdLoadedFromTextFile != deletedRecipientId) {
+                temporaryTextFile << loadedLine << endl;
             }
         }
-        odczytywanyPlikTekstowy.close();
-        tymczasowyPlikTekstowy.close();
+        textFile.close();
+        temporaryTextFile.close();
 
-        usunPlik(pobierzNazwePliku());
-        zmienNazwePliku(nazwaTymczasowegoPlikuZAdresatami, pobierzNazwePliku());
+        deleteFile(getFileName());
+        renameFile(temporaryRecipientFileName, getFileName());
     }
 }
 
-void PlikZAdresatami :: usunPlik(string nazwaPlikuZRozszerzeniem) {
-    if (remove(nazwaPlikuZRozszerzeniem.c_str()) == 0) {}
+void RecipientFile :: deleteFile(string fileName) {
+    if (remove(fileName.c_str()) == 0) {}
     else
-        cout << "Nie udalo sie usunac pliku " << nazwaPlikuZRozszerzeniem << endl;
+        cout << "Nie udalo sie usunac pliku " << fileName << endl;
 }
 
-void PlikZAdresatami :: zmienNazwePliku(string staraNazwa, string nowaNazwa) {
-    if (rename(staraNazwa.c_str(), nowaNazwa.c_str()) == 0) {}
+void RecipientFile :: renameFile(string fileOldName, string fileNewName) {
+    if (rename(fileOldName.c_str(), fileNewName.c_str()) == 0) {}
     else
-        cout << "Nazwa pliku nie zostala zmieniona." << staraNazwa << endl;
+        cout << "Nazwa pliku nie zostala zmieniona." << fileOldName << endl;
 }
 
-void PlikZAdresatami :: edytujWybranaLinieWPliku(string liniaZDanymiAdresataOddzielonePionowymiKreskami, int idEdytowanegoAdresata) {
-    fstream odczytywanyPlikTekstowy, tymczasowyPlikTekstowy;
-    string wczytanaLinia = "";
+void RecipientFile :: editChosenLineInFile(string recipientDataLineSeparatedByVerticalBars, int editedRecipientId) {
+    fstream textFile, temporaryTextFile;
+    string loadedLine = "";
 
-    odczytywanyPlikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
-    tymczasowyPlikTekstowy.open(nazwaTymczasowegoPlikuZAdresatami.c_str(), ios::out | ios::app);
+    textFile.open(getFileName().c_str(), ios::in);
+    temporaryTextFile.open(temporaryRecipientFileName.c_str(), ios::out | ios::app);
 
-    if (odczytywanyPlikTekstowy.good() == true) {
-        while (getline(odczytywanyPlikTekstowy, wczytanaLinia)) {
-            size_t pozycjaPierwszejPionowejKreskiWeWczytanymKontakcie = wczytanaLinia.find('|');
-            int idWczytanegoKontaktu = stoi(wczytanaLinia.substr(0, pozycjaPierwszejPionowejKreskiWeWczytanymKontakcie));
-            if (idWczytanegoKontaktu == idEdytowanegoAdresata) {
-                tymczasowyPlikTekstowy << liniaZDanymiAdresataOddzielonePionowymiKreskami << endl;
+    if (textFile.good() == true) {
+        while (getline(textFile, loadedLine)) {
+            size_t firstVerticalBarPosition = loadedLine.find('|');
+            int loadedRecipientId = stoi(loadedLine.substr(0, firstVerticalBarPosition));
+            if (loadedRecipientId == editedRecipientId) {
+                temporaryTextFile << recipientDataLineSeparatedByVerticalBars << endl;
             } else {
-                tymczasowyPlikTekstowy << wczytanaLinia << endl;
+                temporaryTextFile << loadedLine << endl;
             }
         }
-        odczytywanyPlikTekstowy.close();
-        tymczasowyPlikTekstowy.close();
+        textFile.close();
+        temporaryTextFile.close();
 
-        usunPlik(pobierzNazwePliku());
-        zmienNazwePliku(nazwaTymczasowegoPlikuZAdresatami, pobierzNazwePliku());
+        deleteFile(getFileName());
+        renameFile(temporaryRecipientFileName, getFileName());
     }
 }
 
-void PlikZAdresatami :: zaktualizujDaneWybranegoAdresata(Adresat adresat, int idEdytowanegoAdresata) {
-    string liniaZDanymiAdresata = "";
-    liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
-    edytujWybranaLinieWPliku(liniaZDanymiAdresata, idEdytowanegoAdresata);
+void RecipientFile :: updateChosenRecipientData(Recipient recipient, int editedRecipientId) {
+    string lineWithRecipientData = "";
+    lineWithRecipientData = transformRecipientDataToSeparatedByVerticalBars(recipient);
+    editChosenLineInFile(lineWithRecipientData, editedRecipientId);
 
     cout << endl << "Dane zostaly zaktualizowane." << endl << endl;
 }

@@ -1,38 +1,38 @@
-#ifndef ADRESATMENEDZER_H
-#define ADRESATMENEDZER_H
+#ifndef RECIPIENTMANAGER_H
+#define RECIPIENTMANAGER_H
 
 #include <iostream>
 #include <vector>
 #include <windows.h>
 #include <fstream>
-#include "UzytkownikMenedzer.h"
-#include "MetodyPomocnicze.h"
-#include "Adresat.h"
-#include "PlikZAdresatami.h"
+#include "UserManager.h"
+#include "AuxiliaryMethod.h"
+#include "Recipient.h"
+#include "RecipientFile.h"
 
 using namespace std;
 
-class AdresatMenedzer {
+class RecipientManager {
 
-    PlikZAdresatami plikZAdresatami;
-    const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
-    int idOstatniegoAdresata;
-    vector <Adresat> adresaci;
-    Adresat podajDaneNowegoAdresata(int idZalogowanegoUzytkownika);
-    void wyswietlDaneAdresata(size_t index);
-    void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
-    int podajIdWybranegoAdresata();
-    char wybierzOpcjeZMenuEdycja();
+    RecipientFile recipientFile;
+    const int LOGGED_RECIPIENT_ID;
+    int lastRecipientId;
+    vector <Recipient> recipients;
+    Recipient giveNewRecipientData(int loggedRecipientId);
+    void displayRecipientData(size_t index);
+    void displayFoundRecipientsAmount(int recipientsAmount);
+    int giveChosenRecipientId();
+    char loggedUserPasswordChange();
 public:
-    AdresatMenedzer(int idZalogowanegoUzytkownika, string nazwaPlikuZAdresatami): plikZAdresatami(nazwaPlikuZAdresatami), ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika) {
-        adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
+    RecipientManager(int loggedRecipientId, string recipientFileName): recipientFile(recipientFileName), LOGGED_RECIPIENT_ID(loggedRecipientId) {
+        recipients = recipientFile.loadLoggedUserRecipientsFromFile(LOGGED_RECIPIENT_ID);
     };
-    int dodajAdresata();
-    void wyswietlWszystkichAdresatow();
-    void wyszukajAdresatowPoImieniu();
-    void wyszukajAdresatowPoNazwisku();
-    void usunAdresata();
-    void edytujAdresata();
+    int addRecipient();
+    void displayAllRecipients();
+    void findRecipientByName();
+    void findRecipientBySurname();
+    void deleteRecipient();
+    void editRecipient();
 };
 
 
