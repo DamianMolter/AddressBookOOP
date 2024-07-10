@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int Uzytkownik :: getUserId() {
+int User :: getUserId() {
     return userId;
 }
 string User :: getUserName() {
@@ -12,10 +12,10 @@ string User :: getPassword() {
     return password;
 }
 
-void User :: setId(int newUserId) {
+void User :: setUserId(int newUserId) {
 
-    if(newId >= 0) {
-        id = newId;
+    if(newUserId >= 0) {
+        userId = newUserId;
     }
 }
 void User :: setUserName (string newUserName) {

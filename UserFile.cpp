@@ -3,7 +3,7 @@
 string UserFile :: transformUserDataToSeparatedByVerticalBars(User user) {
     string lineWithUserData = "";
 
-    lineWithUserData += AuxiliaryMethod::convertIntToString(user.pobierzId())+ '|';
+    lineWithUserData += AuxiliaryMethod::convertIntToString(user.getUserId())+ '|';
     lineWithUserData += user.getUserName() + '|';
     lineWithUserData += user.getPassword() + '|';
 
@@ -18,7 +18,7 @@ void UserFile :: addUserToFile(User user) {
     if (textFile.good() == true) {
         lineWithUserData = transformUserDataToSeparatedByVerticalBars(user);
 
-        if (AuxiliaryMethod :: isFileEmpty() == true) {
+        if (TextFile :: isFileEmpty() == true) {
             textFile << lineWithUserData;
         } else {
             textFile << lineWithUserData << endl;

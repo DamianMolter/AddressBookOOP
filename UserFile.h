@@ -16,7 +16,7 @@ class UserFile : protected TextFile{
     string transformUserDataToSeparatedByVerticalBars(User user);
     User loadSingleUserData(string singleUserDataSeparatedByVerticalBars);
 public:
-    UserFile(string userFileName) : TextFile(USERFILENAME){};
+    UserFile(string userFileName) : TextFile(userFileName){};
     vector <User> loadUsersFromFile();
     void addUserToFile(User user);
     void saveAllUsersToFile(vector <User> users);

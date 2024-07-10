@@ -67,13 +67,13 @@ char AddressBook :: pickOptionMainMenu() {
     cout << "2. Logowanie" << endl;
     cout << "9. Koniec programu" << endl;
     cout << "---------------------------" << endl;
-    cout << "Twoj choice: ";
-    choice = AuxiliaryMethod :: wczytajZnak();
+    cout << "Twoj wybor: ";
+    choice = AuxiliaryMethod :: loadCharacter();
 
     return choice;
 }
 
-char AddressBook :: wybierzOpcjeZMenuUzytkownika() {
+char AddressBook :: pickOptionUserMenu() {
     char choice;
 
     system("cls");
@@ -90,7 +90,7 @@ char AddressBook :: wybierzOpcjeZMenuUzytkownika() {
     cout << "8. Wyloguj sie" << endl;
     cout << "---------------------------" << endl;
     cout << "Twoj choice: ";
-    choice = AuxiliaryMethod :: loadCharecter();
+    choice = AuxiliaryMethod :: loadCharacter();
 
     return choice;
 }

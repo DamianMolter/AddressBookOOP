@@ -18,13 +18,13 @@ int UserManager :: getNewUserId() {
     if (users.empty() == true)
         return 1;
     else
-        return users.back().getId() + 1;
+        return users.back().getUserId() + 1;
 }
 
 bool UserManager :: userNameExists(string userName) {
 
     for(size_t i = 0; i < users.size(); i++) {
-        if (users[i].setUserName() == login) {
+        if (users[i].getUserName() == userName) {
             cout << endl << "Istnieje uzytkownik o takim loginie." << endl;
             return true;
         } else {
@@ -36,20 +36,20 @@ bool UserManager :: userNameExists(string userName) {
 
 void UserManager :: displayAllUsers() {
     for (size_t i = 0; i < users.size(); i++) {
-        cout << users[i].getId() << endl;
+        cout << users[i].getUserId() << endl;
         cout << users[i].getUserName() << endl;
         cout << users[i].getPassword() << endl << endl;
     }
 
 }
-Uzytkownik UserManager :: giveNewUserData() {
+User UserManager :: giveNewUserData() {
     string userName, password;
     User user;
-    user.setId(getNewUserId());
+    user.setUserId(getNewUserId());
 
     do {
         cout << endl << "Podaj login: ";
-        cin >> login;
+        cin >> userName;
         user.setUserName(userName);
     } while (userNameExists(user.getUserName()) == true);
 
@@ -79,7 +79,7 @@ int UserManager :: userSignIn() {
                 if (users[i].getPassword() == password) {
                     cout << endl << "Zalogowales sie." << endl << endl;
                     system("pause");
-                    loggedUserId = users[i].getId();
+                    loggedUserId = users[i].getUserId();
                     return loggedUserId;
                 }
             }
@@ -97,10 +97,10 @@ void UserManager :: loggedUserPasswordChange() {
     string newPassword = "";
     cout << "Podaj nowe haslo: ";
 
-    newPassword = MetodyPomocnicze :: wczytajLinie();
+    newPassword = AuxiliaryMethod :: loadLine();
 
     for (size_t i = 0; i < users.size(); i++) {
-        if (users[i].getId() == loggedUserId) {
+        if (users[i].getUserId() == loggedUserId) {
             users[i].setPassword(newPassword);
             cout << "Haslo zostalo zmienione." << endl << endl;
             system("pause");
@@ -111,7 +111,7 @@ void UserManager :: loggedUserPasswordChange() {
 
 void UserManager :: saveAllUsersToFile() {
 
-    plikZUzytkownikami.saveAllUsersToFile(users);
+    userFile.saveAllUsersToFile(users);
 }
 
 bool UserManager :: isUserLogged() {

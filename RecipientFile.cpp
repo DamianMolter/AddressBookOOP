@@ -1,6 +1,6 @@
 #include "RecipientFile.h"
 
-int PlikZAdresatami :: pobierzIdNowegoAdresata() {
+int RecipientFile :: getNewRecipientId() {
     fstream recipientFile;
     recipientFile.open(getFileName().c_str(), ios::in);
     int lastRecipientId = 0;
@@ -16,7 +16,7 @@ int PlikZAdresatami :: pobierzIdNowegoAdresata() {
 void RecipientFile :: addRecipientToFile(Recipient recipient) {
     string lineWithRecipientData = "";
     fstream textFile;
-    plikTekstowy.open(getFileName().c_str(), ios::app);
+    textFile.open(getFileName().c_str(), ios::app);
 
     if (textFile.good() == true) {
         lineWithRecipientData = transformRecipientDataToSeparatedByVerticalBars(recipient);
@@ -31,8 +31,8 @@ void RecipientFile :: addRecipientToFile(Recipient recipient) {
 string RecipientFile :: transformRecipientDataToSeparatedByVerticalBars(Recipient recipient) {
     string lineWithRecipientData = "";
 
-    lineWithRecipientData += AuxiliaryMethod :: convertIntToString(recipient.pobierzId()) + '|';
-    lineWithRecipientData += AuxiliaryMethod :: convertStringToInt(recipient.pobierzIdUzytkownika()) + '|';
+    lineWithRecipientData += AuxiliaryMethod :: convertIntToString(recipient.loadRecipientId()) + '|';
+    lineWithRecipientData += AuxiliaryMethod :: convertIntToString(recipient.loadUserId()) + '|';
     lineWithRecipientData += recipient.getName() + '|';
     lineWithRecipientData += recipient.getSurname() + '|';
     lineWithRecipientData += recipient.getTelephone() + '|';
@@ -52,7 +52,7 @@ vector <Recipient> RecipientFile :: loadLoggedUserRecipientsFromFile(int loggedU
 
     if (textFile.good() == true) {
         while (getline(textFile, singleRecipientDataSeparatedByVerticalBars)) {
-            if(loggedUserId == getRecipientIdFromDataSeparatedByVerticakBars(singleRecipientDataSeparatedByVerticalBars)) {
+            if(loggedUserId == getUserIdFromDataSeparatedByVerticakBars(singleRecipientDataSeparatedByVerticalBars)) {
                 recipient = getRecipientData(singleRecipientDataSeparatedByVerticalBars);
                 recipients.push_back(recipient);
             }
@@ -105,14 +105,14 @@ Recipient RecipientFile :: getRecipientData(string recipientDataSeparatedByVerti
 }
 
 
-int RecipientFile :: getUserIdFromDataSeparatedByVerticakBars(string recipientDataSeparatedByVerticalBars) {
+int RecipientFile :: getUserIdFromDataSeparatedByVerticakBars(string singleRecipientDataSeparatedByVerticalBars) {
     int userBeginPosition = singleRecipientDataSeparatedByVerticalBars.find_first_of('|') + 1;
-    int userId = AuxiliaryMethod :: convertStringToInt(AuxiliaryMethod :: pobierzLiczbe(singleRecipientDataSeparatedByVerticalBars, pozycjaRozpoczeciaIdUzytkownika));
+    int userId = AuxiliaryMethod :: convertStringToInt(AuxiliaryMethod :: getNumber(singleRecipientDataSeparatedByVerticalBars, userBeginPosition));
 
     return userId;
 }
 
-int RecipientFile :: getRecipientIdFromDataSeparatedByVerticakBars(string recipientDataSeparatedByVerticalBars) {
+int RecipientFile :: getRecipientIdFromDataSeparatedByVerticakBars(string singleRecipientDataSeparatedByVerticalBars) {
     int recipientIdBeginPosition = 0;
     int recipientId = AuxiliaryMethod :: convertStringToInt(AuxiliaryMethod :: getNumber(singleRecipientDataSeparatedByVerticalBars, recipientIdBeginPosition));
     return recipientId;
@@ -122,13 +122,13 @@ void RecipientFile :: deleteChosenLineFromFile(int deletedRecipientId) {
     fstream textFile, temporaryTextFile;
     string loadedLine = "";
 
-    odczytywanyPlikTekstowy.open(getFileName().c_str(), ios::in);
+    textFile.open(getFileName().c_str(), ios::in);
     temporaryTextFile.open(temporaryRecipientFileName.c_str(), ios::out | ios::app);
 
     if (textFile.good() == true && deletedRecipientId != 0) {
         while (getline(textFile, loadedLine)) {
             size_t firstVerticalBarPosition = loadedLine.find('|');
-            int recipientIdLoadedFromTextFile = stoi(loadedLine.substr(0, pozycjaPierwszejPionowejKreski));
+            int recipientIdLoadedFromTextFile = stoi(loadedLine.substr(0, firstVerticalBarPosition));
             if(recipientIdLoadedFromTextFile != deletedRecipientId) {
                 temporaryTextFile << loadedLine << endl;
             }

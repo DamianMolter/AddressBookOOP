@@ -49,7 +49,7 @@ char AuxiliaryMethod ::loadCharacter() {
             character = input[0];
             break;
         }
-        cout << "To nie jest pojedynczy character. Wpisz ponownie." << endl;
+        cout << "To nie jest pojedynczy znak. Wpisz ponownie." << endl;
     }
     return character;
 }
@@ -64,7 +64,7 @@ int AuxiliaryMethod :: loadInteger() {
         stringstream myStream(input);
         if (myStream >> number)
             break;
-        cout << "To nie jest number. Wpisz ponownie. " << endl;
+        cout << "To nie jest liczba. Wpisz ponownie. " << endl;
     }
     return number;
 }

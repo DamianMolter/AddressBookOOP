@@ -11,10 +11,10 @@ using namespace std;
 
 class RecipientFile : protected TextFile {
     Recipient recipient;
-    size_t lastRecipientId;
+    int lastRecipientId;
     string temporaryRecipientFileName;
     string transformRecipientDataToSeparatedByVerticalBars(Recipient recipient);
-    int getUserIdFromDataSeparatedByVerticakBars(string recipientDataSeparatedByVerticalBars);
+    int getUserIdFromDataSeparatedByVerticakBars(string singleRecipientDataSeparatedByVerticalBars);
     Recipient getRecipientData(string recipientDataSeparatedByVerticalBars);
     int getRecipientIdFromDataSeparatedByVerticakBars(string recipientDataSeparatedByVerticalBars);
     int getLastRecipientId();

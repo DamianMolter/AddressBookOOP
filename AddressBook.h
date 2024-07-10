@@ -13,7 +13,7 @@ class AddressBook {
     const string RECIPIENT_FILE_NAME;
 public:
     AddressBook(string userFileName, string recipientFileName)
-    :uzytkownikMenedzer(userFileName), RECIPIENT_FILE_NAME(recipientFileName) {
+    :userManager(userFileName), RECIPIENT_FILE_NAME(recipientFileName) {
         recipientManager = NULL;
     };
     ~AddressBook() {
@@ -22,7 +22,7 @@ public:
     }
     void userRegister();
     void displayAllUsers();
-    void userSignin();
+    void userSignIn();
     void loggedUserPasswordChange();
     void addRecipient();
     void displayAllRecipients();

@@ -5,26 +5,27 @@ int RecipientManager :: addRecipient() {
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
     Recipient recipient;
-    recipient = giveNewRecipientData(LOGGED_RECIPIENT_ID);
+    lastRecipientId = recipientFile.getNewRecipientId();
+    recipient = giveNewRecipientData(LOGGED_USER_ID);
     recipients.push_back(recipient);
     recipientFile.addRecipientToFile(recipient);
 
     return lastRecipientId + 1;
 }
 
-Recipient RecipientManager :: giveNewRecipientData(int loggedRecipientId) {
+Recipient RecipientManager :: giveNewRecipientData(int loggedUserId) {
     Recipient recipient;
     string name, surname, telephone, email, address;
-    recipient.setId(recipientFile.getNewRecipientId());
-    recipient.setUserId(loggedRecipientId);
+    recipient.setRecipientId(lastRecipientId);
+    recipient.setUserId(loggedUserId);
 
     cout << "Podaj imie: ";
     name = AuxiliaryMethod :: loadLine();
-    name = AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(imie);
+    name = AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(name);
 
     cout << "Podaj nazwisko: ";
     surname = AuxiliaryMethod :: loadLine();
-    surname = AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(nazwisko);
+    surname = AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(surname);
 
     cout << "Podaj numer telefonu: ";
     telephone = AuxiliaryMethod :: loadLine();
@@ -33,7 +34,7 @@ Recipient RecipientManager :: giveNewRecipientData(int loggedRecipientId) {
     email = AuxiliaryMethod :: loadLine();
 
     cout << "Podaj adres: ";
-    adres = AuxiliaryMethod :: loadLine();
+    address = AuxiliaryMethod :: loadLine();
 
     recipient.setName(name);
     recipient.setSurname(surname);
@@ -49,8 +50,8 @@ void RecipientManager :: displayAllRecipients() {
     if (!recipients.empty()) {
         cout << "             >>> ADRESACI <<<" << endl;
         cout << "-----------------------------------------------" << endl;
-            displayRecipientData(i);
         for (size_t i = 0; i < recipients.size(); i++) {
+            displayRecipientData(i);
         }
         cout << endl;
     } else {
@@ -60,7 +61,7 @@ void RecipientManager :: displayAllRecipients() {
 }
 
 void RecipientManager :: displayRecipientData(size_t index) {
-    cout << endl << "Id:         " << recipients[index].loadId() << endl;
+    cout << endl << "Id:         " << recipients[index].loadRecipientId() << endl;
     cout << endl << "Id uzytkownika:" << recipients[index].loadUserId() << endl;
     cout << "Imie:               " << recipients[index].getName() << endl;
     cout << "Nazwisko:           " << recipients[index].getSurname() << endl;
@@ -170,6 +171,24 @@ void RecipientManager :: deleteRecipient() {
     }
 }
 
+char RecipientManager :: chooseRecipientEditMenuOption() {
+    char choice;
+
+    cout << endl << "   >>> MENU  EDYCJA <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Ktore dane zaktualizowac: " << endl;
+    cout << "1 - Imie" << endl;
+    cout << "2 - Nazwisko" << endl;
+    cout << "3 - Numer telefonu" << endl;
+    cout << "4 - Email" << endl;
+    cout << "5 - Adres" << endl;
+    cout << "6 - Powrot " << endl;
+    cout << endl << "Twoj wybor: ";
+    choice = AuxiliaryMethod :: loadCharacter();
+
+    return choice;
+}
+
 void RecipientManager :: editRecipient() {
     system("cls");
     Recipient recipient;
@@ -178,26 +197,24 @@ void RecipientManager :: editRecipient() {
 
     cout << ">>> EDYCJA WYBRANEGO ADRESATA <<<" << endl << endl;
     editedRecipientId = giveChosenRecipientId();
-
-    char choice;
     bool doesRecipientExist = false;
 
     for (size_t i = 0; i < recipients.size(); i++) {
         if (recipients[i].loadRecipientId() == editedRecipientId) {
             doesRecipientExist = true;
-            choice = chooseRecipientEditMenuOption();
+            char choice = chooseRecipientEditMenuOption();
 
             switch (choice) {
             case '1':
                 cout << "Podaj nowe imie: ";
                 recipients[i].setName(AuxiliaryMethod :: loadLine());
-                recipients[i].setName(AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(recipients[i].pobierzImie()));
+                recipients[i].setName(AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(recipients[i].getName()));
                 recipientFile.updateChosenRecipientData(recipients[i], editedRecipientId);
                 break;
             case '2':
                 cout << "Podaj nowe nazwisko: ";
                 recipients[i].setSurname(AuxiliaryMethod :: loadLine());
-                recipients[i].setSurname(AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(recipients[i].pobierzNazwisko()));
+                recipients[i].setSurname(AuxiliaryMethod :: transformFirstUpperCaseAndRestToLowerCase(recipients[i].getSurname()));
                 recipientFile.updateChosenRecipientData(recipients[i], editedRecipientId);
                 break;
             case '3':
@@ -228,22 +245,4 @@ void RecipientManager :: editRecipient() {
         cout << endl << "Nie ma takiego adresata." << endl << endl;
     }
     system("pause");
-}
-
-char RecipientManager :: chooseRecipientEditMenuOption() {
-    char choice;
-
-    cout << endl << "   >>> MENU  EDYCJA <<<" << endl;
-    cout << "---------------------------" << endl;
-    cout << "Ktore dane zaktualizowac: " << endl;
-    cout << "1 - Imie" << endl;
-    cout << "2 - Nazwisko" << endl;
-    cout << "3 - Numer telefonu" << endl;
-    cout << "4 - Email" << endl;
-    cout << "5 - Adres" << endl;
-    cout << "6 - Powrot " << endl;
-    cout << endl << "Twoj choice: ";
-    choice = AuxiliaryMethod :: loadCharacter();
-
-    return choice;
 }
