@@ -1,23 +1,23 @@
 #include <iostream>
-#include "KsiazkaAdresowa.h"
+#include "AddressBook.h"
 #include "windows.h"
 
 using namespace std;
 
 int main() {
 
-    KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt" , "Adresaci.txt");
+    AddressBook addressBook("Users.txt" , "Recipients.txt");
 
     while (true) {
-        if (!ksiazkaAdresowa.czyUzytkownikJestZalogowany()) {
-            char wybor = ksiazkaAdresowa.wybierzOpcjeZMenuGlownego();
+        if (!addressBook.isUserLogged()) {
+            char choice = addressBook.pickOptionMainMenu();
 
-            switch (wybor) {
+            switch (choice) {
             case '1':
-                ksiazkaAdresowa.rejestracjaUzytkownika();
+                addressBook.userRegister();
                 break;
             case '2':
-                ksiazkaAdresowa.logowanieUzytkownika();
+                addressBook.userSignIn();
                 break;
             case '9':
                 exit(0);
@@ -28,32 +28,32 @@ int main() {
                 break;
             }
         } else {
-            char wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
+            char choice = addressBook.pickOptionUserMenu();
 
-            switch (wybor) {
+            switch (choice) {
             case '1':
-                ksiazkaAdresowa.dodajAdresata();
+                addressBook.addRecipient();
                 break;
             case '2':
-                ksiazkaAdresowa.wyszukajAdresatowPoImieniu();
+                addressBook.findRecipientByName();
                 break;
             case '3':
-                ksiazkaAdresowa.wyszukajAdresatowPoNazwisku();
+                addressBook.findRecipientBySurname();
                 break;
             case '4':
-                ksiazkaAdresowa.wyswietlWszystkichAdresatow();
+                addressBook.displayAllRecipients();
                 break;
             case '5':
-                ksiazkaAdresowa.usunAdresata();
+                addressBook.deleteRecipient();
                 break;
             case '6':
-                ksiazkaAdresowa.edytujAdresata();
+                addressBook.editRecipient();
                 break;
             case '7':
-                ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
+                addressBook.loggedUserPasswordChange();
                 break;
             case '8':
-                ksiazkaAdresowa.wylogowanieUzytkownika();
+                addressBook.userLogout();
                 break;
             }
         }
@@ -65,12 +65,12 @@ int main() {
 
 
 
-    /*KsiazkaAdresowa ksiazkaAdresowa;
-    ksiazkaAdresowa.wyswietlWszystkichUzytkownikow();
-    ksiazkaAdresowa.logowanieUzytkownika();
-    ksiazkaAdresowa.dodajAdresata();
-    ksiazkaAdresowa.wyswietlWszystkichAdresatow();
-    ksiazkaAdresowa.wylogowanieUzytkownika();*/
+    /*AddressBook addressBook;
+    addressBook.wyswietlWszystkichUzytkownikow();
+    addressBook.logowanieUzytkownika();
+    addressBook.dodajAdresata();
+    addressBook.wyswietlWszystkichAdresatow();
+    addressBook.wylogowanieUzytkownika();*/
 
     return 0;
 }

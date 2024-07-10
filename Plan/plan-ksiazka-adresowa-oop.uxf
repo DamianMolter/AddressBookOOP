@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="15.1">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
+      <x>550</x>
       <y>0</y>
       <w>350</w>
       <h>510</h>
     </coordinates>
-    <panel_attributes>KsiazkaAdresowa
+    <panel_attributes>AddressBook
 --
-uzytkownikMenedzer : UzytkownikMenedzer
-adresatMenedzer : AdresatMenedzer
+userManager : UserManager
+recipientManager: RecipientManager
 --
-KsiazkaAdresowa()
-+logowanieUzytkownika() : int
-+rejestracjaUzytkownika() : void
-+wyswietlWszystkichUzytkownikow() : void
-+zmianaHaslaZalogowanegoUzytkownika() : void
-+dodajAdresata() : void
-+wyswietlWszystkichAdresatow() : void
-+wczytajAdresatowZalogowanegoUzytkownikaZPliku(): void
-+wylogowanieUzytkownika() : void
-+czyUzytkownikJestZalogowany() : bool
-+wybierzOpcjeZMenuGlownego() : char
-+wybierzOpcjeZMenuUzytkownika() : char
+AddressBook()
++userSignin() : int
++userRegister() : void
++displayAllUsers() : void
++loggedUserPasswordChange() : void
++addRecipient() : void
++displayAllRecipients() : void
++userLogout() : void
++isUserLogged() : bool
++pickOptionMainMenu() : char
++pickOptionUserMenu() : char
 
 
 </panel_attributes>
@@ -34,175 +33,173 @@ KsiazkaAdresowa()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1430</x>
+      <x>1940</x>
       <y>10</y>
       <w>150</w>
       <h>160</h>
     </coordinates>
-    <panel_attributes>Uzytkownik
+    <panel_attributes>User
 --
-id : integer
-login : string
-haslo : string</panel_attributes>
+userId : integer
+userName : string
+password : string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1470</x>
+      <y>10</y>
+      <w>440</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>UserFile
+--
+singleUserDataSeparatedByVerticalBars : string
+
+--
+
+UserFile()
++addUserToFile() : void
++loadUsersFromFile() : vector &lt;User&gt;
++saveAllUsersToFile() : void
+-loadSingleUserData() : void
+-transformUserDataToSeparatedByVerticalBars() : string()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1750</x>
+      <y>610</y>
+      <w>240</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>AuxiliaryMethod
+--
++convertIntToString() : string
++convertStringToInt() : integer
++getNumber() : string
++loadLine() : string
++transformFirstUpperCaseAndRestToLowerCase() : string
++loadCharacter() : char
++loadInteger() : integer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>560</y>
+      <w>300</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>RecipientManager
+--
+recipientFile : RecipientFile
+recipients : vector &lt;Recipient&gt; 
+lastRecipientId : integer
+LOGGED_RECIPIENT_ID : const integer
+--
+RecipientManager()
++addRecipient() : int
++displayAllRecipients() : void
+-giveNewRecipientData() : Adresat
+-displayRecipientData() : void
+-getNewRecipientId() : int
+-giveChosenRecipientId() : integer
++deleteRecipient() : void
++editRecipient() : void
+-chooseRecipientEditMenuOption() : char
++findRecipientByName() : void
++findRecipientBySurname() : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>560</y>
+      <w>420</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>RecipientFile
+--
+recipient : Recipient
+recipientFileName : string
+lastRecipientId : size_t
+temporaryRecipientFileName : string
+--
+RecipientFile()
++addRecipientToFile() : void
++loadLoggedUserRecipientsFromFile() : integer
++getNewRecipientId() : integer
+-getUserIdFromDataSeparatedByVerticakBars() : integer
+-getRecipientIdFromDataSeparatedByVerticakBars(): integer
+-transformRecipientDataToSeparatedByVerticalBars(): string
+-getRecipientData(): Recipient
+-loadRecipientFromVerticalBars() : integer
+-getLastRecipientId() : integer
+-deleteFile() : void
+-renameFile() : void
++deleteChosenLineFromFile() : void
++editChosenLineInFile() : void
++updateChosenRecipientData() : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1360</x>
+      <y>660</y>
+      <w>180</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Recipient
+--
+recipientId : int
+name : string
+surname : string
+telephone : string
+email : string
+address : string
+--
+Recipient()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>960</x>
-      <y>10</y>
-      <w>440</w>
-      <h>270</h>
-    </coordinates>
-    <panel_attributes>PlikZUzytkownikami
---
-nazwaPlikuZUzytkownikami : string
-plikTekstowy : fstream
-daneJednegoUzytkownikaOddzielonePionowymiKreskami : string
-
---
-
-PlikZUzytkownikami()
-+dopiszUzytkownikaDoPliku() : void
-+wczytajUzyktownikowZPliku() : void
-+zapiszWszystkichUzytkownikowDoPliku() : void
--pobierzDaneUzytkownika() : void
--zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami() : string()
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1240</x>
-      <y>610</y>
-      <w>240</w>
-      <h>350</h>
-    </coordinates>
-    <panel_attributes>MetodyPomocnicze
---
-+konwerjsaIntNaString() : string
-+konwersjaStringNaInt() : integer
-+pobierzLiczbe() : string
-+wczytajLinie() : string
-+zamienPierwszaLitereNaDuzaAPozostaleNaMale() : string
-+wczytajZnak() : char
-+wczytajLiczbeCalkowita() : integer</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>10</x>
-      <y>560</y>
-      <w>300</w>
-      <h>370</h>
-    </coordinates>
-    <panel_attributes>AdresatMenedzer
---
-plikZAdresatami : PlikZAdresatami
-adresaci : vector &lt;Adresat&gt; 
-idOstatniegoAdresata : integer
-ID_ZALOGOWANEGO_UZYTKOWNIKA : const integer
-idOstatniegoAdresata : integer
---
-AdresatMenedzer()
-+dodajAdresata() : int
-+wyswietlWszystkichAdresatow() : void
--podajDaneNowegoAdresata() : Adresat
--wyswietlDaneAdresata() : void
--pobierzIdNowegoAdresata() : int
--wyswietlDaneAdresata() : void
--podajDaneNowegoAdresata() : Adresat
--wyswietlDaneAdresata() : void
--podajIdWybranegoAdresata() : integer
-+usunAdresata() : void
-+edytujAdresata() : void
--wybierzOpcjeZMenuEdycja() : char
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>370</x>
-      <y>560</y>
-      <w>420</w>
-      <h>360</h>
-    </coordinates>
-    <panel_attributes>PlikZAdresatami
---
-adresat : Adresat
-nazwaPlikuZAdresatami : string
-idOstatniegoAdresata : size_t
---
-PlikZAdresatami()
-+dopiszAdresataDoPliku() : void
-+wczytajAdresatowZalogowanegoUzytkownikaZPliku() : integer
-+pobierzIdNowegoAdresata() : integer
--pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami() : integer
--pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(): integer
--zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(): string
--pobierzDaneAdresata(): Adresat
--pobierzIdAdresataZDanychOddzielonychPionowymiKreskami() : integer
--pobierzIdOstatniegoAdresata() : integer
--usunPlik() : void
--zmienNazwePliku() : void
-+usunWybranaLinieWPliku() : void
-+zaktualizujDaneWybranegoAdresata() : void
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>850</x>
-      <y>660</y>
-      <w>180</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>Adresat
---
-id : int
-imie : string
-nazwisko : string
-numerTelefonu : string
-email : string
-adres : string
---
-Adresat()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>450</x>
       <y>0</y>
       <w>470</w>
       <h>360</h>
     </coordinates>
-    <panel_attributes>UzytkownikMenedzer
+    <panel_attributes>UserManager
 --
-idZalogowanegoUzytkownika : integer
-uzytkownik : Uzytkownik
-uzytkownicy : vector &lt;Uzytkownik&gt;
+loggedUserId : integer
+user : User
+users : vector &lt;user&gt;
 --
-UzytkownikMenedzer()
-+czyUzytkownikJestZalogowany() : bool
-+pobierzIdZalogowanegoUzytkownika() : integer
-+rejestracjaUzytkownika() : void
-+logowanieUzytkownika() : integer
-+zmianaHaslaZalogowanegoUzytkownika() : void
-+wyswietlWszystkichUzytkownikow() : void
-+wczytajUzyktownikowZPliku() : void
-+wylogowanieUzytkownika() : void
-+wyszukajAdresatowPoImieniu() : void
-+wyszukajAdresatowPoNazwisku() : void
--podajDaneNowegoUzytkownika() : Uzytkownik
--pobierzIdNowegoUzytkownika() : integer
--czyIstniejeLogin() : bool
--zapiszWszystkichUzytkownikowDoPliku() : void
--wyswietlIloscWyszukanychAdresatow() : void
+UserManager()
++isUserLogged() : bool
++getLoggedUserId() : integer
++userRegister() : void
++userSignIn() : integer
++loggedUserPasswordChange() : void
++displayAllUsers() : void
++loadUsersFromFile() : void
++userLogout() : void
++searchRecipientsByName() : void
++searchRecipientsBySurname() : void
+-giveNewUserData() : Uzytkownik
+-getNewUserId() : integer
+-usernameExists() : bool
+-saveAllUsersToFile() : void
+-displayFoundRecipientsAmount() : void
 
 
 </panel_attributes>
@@ -211,7 +208,7 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
+      <x>890</x>
       <y>260</y>
       <w>90</w>
       <h>30</h>
@@ -222,7 +219,7 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>910</x>
+      <x>1420</x>
       <y>230</y>
       <w>70</w>
       <h>30</h>
@@ -233,7 +230,7 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1390</x>
+      <x>1900</x>
       <y>140</y>
       <w>60</w>
       <h>30</h>
@@ -244,7 +241,7 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
+      <x>810</x>
       <y>720</y>
       <w>90</w>
       <h>30</h>
@@ -255,7 +252,7 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
+      <x>670</x>
       <y>500</y>
       <w>30</w>
       <h>80</h>
@@ -266,7 +263,7 @@ UzytkownikMenedzer()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>780</x>
+      <x>1290</x>
       <y>700</y>
       <w>90</w>
       <h>30</h>
@@ -277,24 +274,24 @@ UzytkownikMenedzer()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>730</x>
+      <x>1240</x>
       <y>370</y>
       <w>230</w>
       <h>160</h>
     </coordinates>
-    <panel_attributes>PlikTekstowy
+    <panel_attributes>TextFile
 --
-NAZWA_PLIKU : const string
+FILE_NAME : const string
 --
-PlikTekstowy()
-+czyPlikJestPusty() : bool
-+pobierzNazwePliku() : string</panel_attributes>
+TextFile()
++isFileEmpty() : bool
++getFileName() : string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>940</x>
+      <x>1450</x>
       <y>270</y>
       <w>120</w>
       <h>120</h>
@@ -306,7 +303,7 @@ PlikTekstowy()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
+      <x>1240</x>
       <y>520</y>
       <w>100</w>
       <h>60</h>
