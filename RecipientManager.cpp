@@ -157,10 +157,10 @@ void RecipientManager :: deleteRecipient() {
             if (character == 't') {
                 recipientFile.deleteChosenLineFromFile(deletedRecipientId);
                 recipients.erase(recipients.begin() + i);
-                cout << endl << endl << "Szukany recipient zostal USUNIETY" << endl << endl;
+                cout << endl << endl << "Szukany adresat zostal USUNIETY" << endl << endl;
                 system("pause");
             } else {
-                cout << endl << endl << "Wybrany recipient NIE zostal usuniety" << endl << endl;
+                cout << endl << endl << "Wybrany adresat NIE zostal usuniety" << endl << endl;
                 system("pause");
             }
         }

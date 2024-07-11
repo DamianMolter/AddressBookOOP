@@ -89,7 +89,7 @@ char AddressBook :: pickOptionUserMenu() {
     cout << "7. Zmien haslo" << endl;
     cout << "8. Wyloguj sie" << endl;
     cout << "---------------------------" << endl;
-    cout << "Twoj choice: ";
+    cout << "Twoj wybor: ";
     choice = AuxiliaryMethod :: loadCharacter();
 
     return choice;

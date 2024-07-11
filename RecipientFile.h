@@ -23,7 +23,7 @@ class RecipientFile : protected TextFile {
 public:
     RecipientFile(string RECIPIENTFILENAME) : TextFile(RECIPIENTFILENAME) {
     lastRecipientId = 0;
-    temporaryRecipientFileName = "Adresaci_temp.txt";
+    temporaryRecipientFileName = "Recipient_temp.txt";
 };
     void addRecipientToFile(Recipient recipient);
     vector <Recipient> loadLoggedUserRecipientsFromFile(int loggedUserId);
