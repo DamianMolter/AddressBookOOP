@@ -1,7 +1,6 @@
 #include "App.h"
 
 void App :: run(){
-//AddressBook addressBook(string userFileName, string recipientFileName);
 
     while (true) {
         if (!addressBook.isUserLogged()) {
