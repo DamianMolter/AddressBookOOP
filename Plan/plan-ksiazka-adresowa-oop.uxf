@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>595</x>
-      <y>63</y>
+      <x>154</x>
+      <y>378</y>
       <w>245</w>
       <h>357</h>
     </coordinates>
@@ -33,8 +33,8 @@ AddressBook()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1554</x>
-      <y>91</y>
+      <x>1043</x>
+      <y>63</y>
       <w>105</w>
       <h>112</h>
     </coordinates>
@@ -48,8 +48,8 @@ password : string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1225</x>
-      <y>91</y>
+      <x>700</x>
+      <y>14</y>
       <w>308</w>
       <h>189</h>
     </coordinates>
@@ -71,8 +71,8 @@ UserFile()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1421</x>
-      <y>511</y>
+      <x>1043</x>
+      <y>210</y>
       <w>168</w>
       <h>245</h>
     </coordinates>
@@ -90,8 +90,8 @@ UserFile()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>756</x>
-      <y>483</y>
+      <x>427</x>
+      <y>399</y>
       <w>210</w>
       <h>259</h>
     </coordinates>
@@ -120,8 +120,8 @@ RecipientManager()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>994</x>
-      <y>483</y>
+      <x>665</x>
+      <y>399</y>
       <w>294</w>
       <h>252</h>
     </coordinates>
@@ -153,8 +153,8 @@ RecipientFile()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1288</x>
-      <y>567</y>
+      <x>987</x>
+      <y>476</y>
       <w>126</w>
       <h>105</h>
     </coordinates>
@@ -173,8 +173,8 @@ Recipient()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>875</x>
-      <y>63</y>
+      <x>329</x>
+      <y>21</y>
       <w>329</w>
       <h>252</h>
     </coordinates>
@@ -208,8 +208,30 @@ UserManager()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>833</x>
-      <y>245</y>
+      <x>329</x>
+      <y>266</y>
+      <w>21</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>651</x>
+      <y>147</y>
+      <w>63</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1001</x>
+      <y>105</y>
       <w>56</w>
       <h>21</h>
     </coordinates>
@@ -219,30 +241,8 @@ UserManager()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1197</x>
-      <y>224</y>
-      <w>42</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;40.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1526</x>
-      <y>182</y>
-      <w>42</w>
-      <h>21</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>959</x>
-      <y>595</y>
+      <x>630</x>
+      <y>511</y>
       <w>49</w>
       <h>21</h>
     </coordinates>
@@ -252,30 +252,30 @@ UserManager()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>679</x>
-      <y>413</y>
-      <w>203</w>
-      <h>84</h>
+      <x>392</x>
+      <y>476</y>
+      <w>49</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;270.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1281</x>
-      <y>581</y>
-      <w>21</w>
-      <h>35</h>
+      <x>952</x>
+      <y>497</y>
+      <w>49</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1316</x>
-      <y>350</y>
+      <x>686</x>
+      <y>245</y>
       <w>161</w>
       <h>112</h>
     </coordinates>
@@ -291,34 +291,34 @@ TextFile()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1225</x>
-      <y>273</y>
-      <w>259</w>
-      <h>91</h>
+      <x>756</x>
+      <y>196</y>
+      <w>77</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;:protected&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;350.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1246</x>
-      <y>455</y>
-      <w>140</w>
-      <h>42</h>
+      <x>735</x>
+      <y>350</y>
+      <w>77</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;:protected&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;40.0;180.0;10.0</additional_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>455</x>
-      <y>448</y>
+      <x>28</x>
+      <y>119</y>
       <w>245</w>
-      <h>357</h>
+      <h>154</h>
     </coordinates>
     <panel_attributes>App
 --
@@ -327,5 +327,16 @@ addressBook: AddressBook
 App()
 +run(): void</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>266</y>
+      <w>21</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
   </element>
 </diagram>
