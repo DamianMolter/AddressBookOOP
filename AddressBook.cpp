@@ -8,12 +8,8 @@ void AddressBook::userRegister() {
 }
 
 bool AddressBook :: isUserLogged() {
-    if(userManager.isUserLogged()) {
-        return true;
-    } else {
-        return false;
+    return userManager.isUserLogged();
     }
-}
 
 void AddressBook :: userSignIn() {
 
